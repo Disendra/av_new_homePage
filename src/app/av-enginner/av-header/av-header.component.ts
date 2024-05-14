@@ -10,6 +10,7 @@ import { Router } from '@angular/router'
 import { ClientsComponent } from 'src/app/home-page/clients/clients.component'
 import { AuthGuardService } from 'src/app/services/auth-guard.service'
 import { AuthServiceService } from 'src/app/services/auth-service.service'
+import { FaServiceService } from 'src/app/services/fa-service.service'
 import { PopupService } from 'src/app/services/popup.service'
 import { UserServicesService } from 'src/app/services/user-services.service'
 
@@ -57,6 +58,7 @@ export class AvHeaderComponent implements OnInit {
     private authService: AuthServiceService,
     private popup: PopupService,
     private userService: UserServicesService,
+    private faService : FaServiceService,
     private authGuard : AuthGuardService
   ) {
     this.userName = authService.getLoginuserName()
@@ -66,7 +68,7 @@ export class AvHeaderComponent implements OnInit {
 
   ngOnInit (): void {
     this.showSpinner = true;
-    this.onClick('feed');
+    this.onClick('about');
     this.getProfile()
     this.userService.getProfileWeight(this.emailId).subscribe((response: any) => {
         this.profileWeight = response.profileWeight
@@ -268,7 +270,8 @@ export class AvHeaderComponent implements OnInit {
   }
 
   logOut () {
-    this.authGuard.logout();
+    this.faService.clearSession();
+    this.router.navigate(['/home-page']);
   }
 
   toggleKnowledgeBase () {

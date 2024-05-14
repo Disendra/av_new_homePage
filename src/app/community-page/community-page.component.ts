@@ -6,6 +6,7 @@ import { Router } from '@angular/router'
 import { UserServicesService } from '../services/user-services.service'
 import { CommunityService } from '../services/community.service'
 import { AuthGuardService } from '../services/auth-guard.service'
+import { FaServiceService } from '../services/fa-service.service'
 
 @Component({
   selector: 'app-community-page',
@@ -50,6 +51,7 @@ export class CommunityPageComponent {
     private router: Router,
     private authService: AuthServiceService,
     private commintyService: CommunityService,
+    private faService : FaServiceService,
     private userService: UserServicesService,
     private authGuard : AuthGuardService
   ) {}
@@ -405,6 +407,7 @@ private handleError(error: any) {
   }
 
   logOut () {
-    this.authGuard.logout();
-}
+    this.faService.clearSession();
+    this.router.navigate(['/home-page']);
+  }
 }

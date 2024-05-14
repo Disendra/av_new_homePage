@@ -59,6 +59,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { CommunityPageComponent } from './community-page/community-page.component';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { CommunityMyPostsComponent } from './community-page/community-my-posts/community-my-posts.component';
+import { GuidlinesComponent } from './home-page/guidlines/guidlines.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,7 +97,8 @@ import { CommunityMyPostsComponent } from './community-page/community-my-posts/c
     ReportsComponent,
     BussinessCardComponent,
     CommunityPageComponent,
-    CommunityMyPostsComponent
+    CommunityMyPostsComponent,
+    GuidlinesComponent
   ],
   imports: [
     BrowserModule,
@@ -109,6 +112,7 @@ import { CommunityMyPostsComponent } from './community-page/community-my-posts/c
     MatFormFieldModule,
     MatButtonModule,
     RecaptchaModule,
+    PdfViewerModule,
     MatCheckboxModule,
     HttpClientModule,
     CommonModule,

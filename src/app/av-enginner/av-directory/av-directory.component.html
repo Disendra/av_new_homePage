@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 </head>
 
 <body>
@@ -39,40 +40,30 @@
         </div>
       </div>
 
-      <div class="arrow_Container">
-        <div class="arrow-Icon" *ngIf="showClickedData" (click)="onBack()">
-          <mat-icon>arrow_back</mat-icon>
-        </div>
-      </div>
-
-      
-      <div class=" show-box center-content" *ngIf="showClickedData">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <p class="top-text">Congratulations! The individual you are seeking is a member of our community.</p>
-               <div class="our-team">
-                <div class="picture">
-                    <img class="img-fluid" [src]="imagePath">
-                </div>
-
-                <div *ngFor="let item of clickedUserData" [ngClass]="{'no_company': !item.companyName || item.companyName.trim() === ''}" class="team-content">
-                    <p class="user_Name">{{ (item.userName) }}</p>
-                    <span class="title">{{ companyName }}</span>
-                    <span class="title">{{ item.role }}</span>
-                </div>
-    
-                <ul class="social">
-                  <li *ngIf="facebookUrl"><a [href]="facebookUrl" target="_blank" class="fa fa-facebook" aria-hidden="true"></a></li>
-                  <li *ngIf="!facebookUrl" matTooltip={{emptyLinks}}><a class="fa fa-facebook" aria-hidden="true" [ngClass]="{'disabled': !facebookUrl}"></a></li>              
-                  <li *ngIf="twitterUrl"><a [href]="twitterUrl" target="_blank" class="fa bi-twitter-x" aria-hidden="true"></a></li>
-                  <li *ngIf="!twitterUrl" matTooltip={{emptyLinks}}><a class="bi-twitter-x" aria-hidden="true" [ngClass]="{'disabled': !twitterUrl}"></a></li>
-                  <li *ngIf="instagramUrl"><a [href]="instagramUrl" target="_blank" class="fa fa-instagram" aria-hidden="true"></a></li>
-                  <li *ngIf="!instagramUrl" matTooltip={{emptyLinks}}><a class="fa fa-instagram" aria-hidden="true" [ngClass]="{'disabled': !instagramUrl}"></a></li>
-                  <li *ngIf="linkedInUrl"><a [href]="linkedInUrl" target="_blank" class="fa fa-linkedin" aria-hidden="true"></a></li>
-                  <li *ngIf="!linkedInUrl" matTooltip={{emptyLinks}}><a class="fa fa-linkedin" aria-hidden="true" [ngClass]="{'disabled': !linkedInUrl}"></a></li>
-              </ul>
-              
-            </div>
+   <div class="wrapper" *ngIf="showClickedData">
+        <div class="img-area">
+          <div class="inner-area">
+            <img [src]="imagePath" alt="">
           </div>
-    </div>
+        </div>
+        <div class="icon arrow" *ngIf="showClickedData" (click)="onBack()"><i class="fas fa-arrow-left"></i></div>
+        <div *ngFor="let item of clickedUserData">
+          <div class="name">{{ (item.userName) }}</div>
+          <div class="about">{{ companyName }}</div>
+        </div>
+        <div class="social-icons">
+          <a *ngIf="facebookUrl" [href]="facebookUrl" target="_blank" class="fb"><i class="fab fa-facebook-f"></i></a>
+          <a *ngIf="!facebookUrl" [ngClass]="{'disabled': !facebookUrl}" matTooltip="{{ emptyLinks }}" class="fb"><i class="fab fa-facebook-f"></i></a>
+          
+          <a *ngIf="twitterUrl" [href]="twitterUrl" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
+          <a *ngIf="!twitterUrl" [ngClass]="{'disabled': !twitterUrl}" matTooltip="{{ emptyLinks }}" class="twitter"><i class="fab fa-twitter"></i></a>
+          
+          <a *ngIf="instagramUrl" [href]="instagramUrl" target="_blank" class="insta"><i class="fab fa-instagram"></i></a>
+          <a *ngIf="!instagramUrl" [ngClass]="{'disabled': !instagramUrl}" matTooltip="{{ emptyLinks }}" class="insta"><i class="fab fa-instagram"></i></a>
+          
+          <a *ngIf="linkedInUrl" [href]="linkedInUrl" target="_blank" class="lIn"><i class="fab fa-linkedin"></i></a>
+          <a *ngIf="!linkedInUrl" [ngClass]="{'disabled': !linkedInUrl}" matTooltip="{{ emptyLinks }}" class="lIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+  </div>
     <app-spinner *ngIf="showSpinner" class="spinner"></app-spinner>
 </body>

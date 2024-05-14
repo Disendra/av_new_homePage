@@ -7,6 +7,7 @@ import { image } from 'html2canvas/dist/types/css/types/image'
 import { MatSlideToggleChange } from '@angular/material/slide-toggle'
 import { PopupService } from '../services/popup.service'
 import { AuthGuardService } from '../services/auth-guard.service'
+import { FaServiceService } from '../services/fa-service.service'
 
 @Component({
   selector: 'app-ekart',
@@ -48,15 +49,26 @@ export class EkartComponent implements OnInit {
     private popup: PopupService,
     private userService: UserServicesService,
     private router: Router,
+    private faService : FaServiceService,
     private authService: AuthServiceService,
     private authGuard : AuthGuardService
   ) {}
   ngOnInit (): void {
+    this.setSession();
     this.emailId = this.authService.getLoggedInEmail()
     this.userName = this.authService.getLoginuserName()
     this.getCartData(this.offset)
     this.getProfileImage()
   }
+
+  setSession() {
+  this.faService.getSession().subscribe(
+    (response) => {
+      const token = response.session[0].jwtToken;
+      this.faService.setSession(token);
+})
+  }
+
 
   loadMoreCartData () {
     this.offset += 5
@@ -318,7 +330,8 @@ export class EkartComponent implements OnInit {
       (this.selectedFileName = '')
   }
 
-  logOut () {
-   this.authGuard.logout();
+    logOut () {
+      this.faService.clearSession();
+      this.router.navigate(['/home-page']);
+    }
   }
-}

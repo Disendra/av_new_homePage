@@ -9,16 +9,19 @@ import { BussinessCardComponent } from './bussiness-card/bussiness-card.componen
 import { CommunityPageComponent } from './community-page/community-page.component'
 import { ContactComponent } from './home-page/contact/contact.component'
 import { AuthGuardService } from './services/auth-guard.service'
+import { GuidlinesComponent } from './home-page/guidlines/guidlines.component'
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: '****', redirectTo: '' },
   { path: 'home-page', redirectTo: '' },
   { path: 'contactUs', component: ContactComponent },
+  { path: 'privacy-policy', component: GuidlinesComponent },
+  { path: 'cookie-policy', component: GuidlinesComponent }, 
   { path: 'login-page/:value', component: LoginPageComponent },
-  { path: 'ekart-page', component: EkartComponent },
+  { path: 'ekart-page', component: EkartComponent, canActivate: [AuthGuardService] },
   { path: 'av-community', component: CommunityPageComponent, canActivate: [AuthGuardService] },
-  { path: 'avEngineer-dashboard', component: AvEnginnerComponent, canActivate: [AuthGuardService] },
+  { path: 'avEngineer-dashboard', component: AvEnginnerComponent },
   { path: 'admin-page', component: AdminPageComponent, canActivate: [AuthGuardService] },
   { path: 'bussiness-card/:emailId', component: BussinessCardComponent }
 ]   

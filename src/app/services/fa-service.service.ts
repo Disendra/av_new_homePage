@@ -16,10 +16,26 @@ export class FaServiceService {
   getSession() {
     return this.http.get<any>(`${this.url}/getSession`);
   }
-  
-  logout() {
-    return this.http.get<any>(`${this.url}/logout`);
+
+
+  setSession(token: string): void {
+    localStorage.setItem('jwtToken', token);
   }
+
+  
+  hasSession(): boolean {
+    const token = localStorage.getItem('jwtToken');
+    return !!token; 
+  }
+
+  clearSession(): void {
+    localStorage.removeItem('jwtToken');
+  }
+  
+  
+  // logout() {
+  //   return this.http.get<any>(`${this.url}/logout`);
+  // }
 
   login (emailId: string, password: string) {
     return this.http.post(`${this.url}/login`, { emailId, password })

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,7 +6,6 @@
   <title>Login and Signup Form</title>
 </head>
 <body>
- <!-- ======= About Section ======= -->
  <section id="about" class="about">
     <div class="container">
 
@@ -22,12 +21,6 @@
         <div class="col-lg-8 pt-4 pt-lg-0 content custom-content  mt-4" data-aos="fade-left">
           <div class="row user-data">
             <div class="col-lg-6">
-              <!-- <ul>
-                <li><i>&#10004;</i> <strong>Full Name:</strong> <span>{{ userName }}</span></li>
-                <li><i>&#10004;</i> <strong>Birthday:</strong> <span>{{ dateOfBirth !== 'not updated' ? formatDOB(dateOfBirth) : dateOfBirth }}</span></li>
-                <li><i>&#10004;</i> <strong>Gender:</strong> <span>{{ gender }}</span></li>
-                <li><i>&#10004;</i> <strong>City:</strong> <span>{{ userCity }}</span></li>
-              </ul> -->
 
               <ul>
                 <li><span class="material-icons">person</span> <span class="data">{{ userName }}</span></li>
@@ -47,9 +40,128 @@
           </div>
         </div>
       </div>
-      <!-- <app-feedback-page></app-feedback-page> -->
     </div>
-  </section><!-- End About Section -->
+  </section>
   <app-spinner *ngIf="showSpinner" class="spinner"></app-spinner>
   </body>
-  </html>
+  </html> -->
+
+
+
+
+
+  <!DOCTYPE html>
+  <html lang="en">
+  
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  
+  <body>
+    <div class="container header-boxs emp-profile">
+      <form method="post">
+          <div class="row">
+              <div class="col-md-4">
+                  <div class="profile-img">
+                    <img src="https://media.licdn.com/dms/image/D5603AQEZg5Kpp8wSqw/profile-displayphoto-shrink_100_100/0/1712027407850?e=2147483647&v=beta&t=vOnRexNswr4KxcWr1hbMeW-Nw6AcqkFOfxnntI5xXjU" alt="" width="200" style="border-radius: 50%; border: 2px solid #ccc; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);"/>
+
+                      <!-- <div class="file btn btn-lg btn-primary">
+                          Change Photo
+                          <input type="file" name="file"/>
+                      </div> -->
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="profile-head">
+                      <h2> Disendra Gosu</h2>
+                      <h4>Software Developer</h4>
+                      <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                      <ul class="nav nav-tabs" id="myTab" role="tablist">
+                          <li class="nav-item">
+                              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="col-md-2">
+                  <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-4">
+                  <div class="profile-work">
+                      <p>WORK LINK</p>
+                      <a href="">Website Link</a><br/>
+                      <a href="">Bootsnipp Profile</a><br/>
+                      <a href="">Bootply Profile</a>
+                  </div>
+              </div>
+              <div class="col-md-8" style="margin-top: -20px;">
+                  <div class="tab-content profile-tab" id="myTabContent">
+                      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <label>Name</label>
+                              </div>
+                              <div class="col-md-6">
+                                  <p>Disendra Gosu</p>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <label>Emails Id</label>
+                              </div>
+                              <div class="col-md-6">
+                                  <p>disendra889@gmail.com</p>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <label>Mobile Number</label>
+                              </div>
+                              <div class="col-md-6">
+                                  <p>8919484183</p>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                                <label>Desination</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Software Developer</p>
+                            </div>
+                        </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <label>DOB</label>
+                              </div>
+                              <div class="col-md-6">
+                                  <p>27-Dec-2000</p>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                                <label>Location</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Hyderabad</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                              <label>Gender</label>
+                          </div>
+                          <div class="col-md-6">
+                              <p>Male</p>
+                          </div>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </form>
+  </div>
+  
+</body>
+</html>

@@ -9,6 +9,10 @@ import { Router } from '@angular/router'
 export class FooterComponent {
   constructor (private router: Router) {}
 
+  onClick(value : any) {
+    this.router.navigate(['/guideLines', value])
+  }
+
   socialLinks (type: any) {
     if (type === 'twitter') {
       window.open('https://twitter.com/rgbaudiovideo', '_blank')
