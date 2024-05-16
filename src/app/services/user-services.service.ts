@@ -1,18 +1,18 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServicesService {
   // url = 'https://av-nodejs.onrender.com'
-  
+
   // url = 'http://10.0.0.68:3000';
-  
+
   url = 'http://localhost:3000'
 
-  private refreshData$ = new Subject<void>();
+  private refreshData$ = new Subject<void>()
 
   constructor (private http: HttpClient) {}
 
@@ -24,7 +24,7 @@ export class UserServicesService {
     return this.http.post(`${this.url}/updateProfile`, data)
   }
 
-  uploadSocialMedia(data : FormData) {
+  uploadSocialMedia (data: FormData) {
     return this.http.post(`${this.url}/insertSocialMedia`, data)
   }
 
@@ -40,11 +40,11 @@ export class UserServicesService {
     return this.http.get(`${this.url}/getProfileImages`)
   }
 
-  getProfileData() {
-    return this.http.get(`${this.url}/getProfile`);
+  getProfileData () {
+    return this.http.get(`${this.url}/getProfile`)
   }
 
-  uploadProfileImage(data : FormData) {
+  uploadProfileImage (data: FormData) {
     return this.http.post(`${this.url}/insertProfileImage`, data)
   }
 
@@ -57,23 +57,25 @@ export class UserServicesService {
   }
 
   getSocialMediaProfile (emailId: string) {
-    return this.http.get<any>(`${this.url}/getSocialMediaProfile/${emailId}`);
+    return this.http.get<any>(`${this.url}/getSocialMediaProfile/${emailId}`)
   }
 
   getProfileWeight (emailId: string) {
     return this.http.get<any>(`${this.url}/getProfileWeight/${emailId}`)
   }
 
-  getCartData(offset: number, searchText: string) {
+  getCartData (offset: number, searchText: string) {
     const params = new HttpParams()
       .set('offset', offset.toString())
-      .set('searchText', searchText);
-    return this.http.get<any>(`${this.url}/getCartData`, { params });
+      .set('searchText', searchText)
+    return this.http.get<any>(`${this.url}/getCartData`, { params })
   }
 
-    getUploadData(emailId: string, offset: any) {
-      const params = new HttpParams().set('offset', offset.toString());
-      return this.http.get<any>(`${this.url}/getUploadData/${emailId}`, { params });
+  getUploadData (emailId: string, offset: any) {
+    const params = new HttpParams().set('offset', offset.toString())
+    return this.http.get<any>(`${this.url}/getUploadData/${emailId}`, {
+      params
+    })
   }
 
   insertCart (data: FormData) {
@@ -104,13 +106,11 @@ export class UserServicesService {
     return this.http.get<any>(`${this.url}/getBussinessCard/${emailId}`)
   }
 
-  getRefreshDataObservable() {
-    return this.refreshData$.asObservable();
+  getRefreshDataObservable () {
+    return this.refreshData$.asObservable()
   }
 
-  refreshData() {
-    this.refreshData$.next();
+  refreshData () {
+    this.refreshData$.next()
   }
-
-
 }

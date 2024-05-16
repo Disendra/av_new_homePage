@@ -12,7 +12,7 @@
           <div class="col-md-6">
             <div class="card">
                 <div class="input-box">
-                    <input type="text" class="form-control" [(ngModel)]="filterTerm" (input)="applyFilter()" />
+                    <input type="text" class="form-control" [(ngModel)]="filterTerm" (input)="applyFilter()" (keyup.enter)="this.getData(0,10);"/>
                     <i class="fa fa-search"></i>
                   </div>
                       
@@ -20,9 +20,9 @@
                 <!-- <i class="fa fa-user-circle-o"></i> -->
                 <img class="search_Image" [src]="item.imagePath">
                 <div class="d-flex flex-column ml-3">
-                  <span class="Search_Name">{{ item.userName }}</span>
-                  <span class="company_Name">{{ item.companyName }}</span>
-                  <small>{{ item.role }}</small>
+                  <span class="Search_Name">{{ item.fullName }}</span>
+                  <span class="company_Name">{{ item.designation }}</span>
+                  <!-- <small>{{ item.role }}</small> -->
                 </div>
               </div>
       
@@ -48,8 +48,8 @@
         </div>
         <div class="icon arrow" *ngIf="showClickedData" (click)="onBack()"><i class="fas fa-arrow-left"></i></div>
         <div *ngFor="let item of clickedUserData">
-          <div class="name">{{ (item.userName) }}</div>
-          <div class="about">{{ companyName }}</div>
+          <div class="name">{{ item.fullName }}</div>
+          <div class="about">{{ item.designation }}</div>
         </div>
         <div class="social-icons">
           <a *ngIf="facebookUrl" [href]="facebookUrl" target="_blank" class="fb"><i class="fab fa-facebook-f"></i></a>

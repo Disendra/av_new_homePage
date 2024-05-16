@@ -16,13 +16,13 @@ export class FaServiceService {
   getSession() {
     return this.http.get<any>(`${this.url}/getSession`);
   }
-
-
-  setSession(token: string): void {
+    
+  setSession(token: string,userName : string, emailId: any): void {
     localStorage.setItem('jwtToken', token);
+    localStorage.setItem('userName', userName);
+    localStorage.setItem('emailId', emailId);
   }
 
-  
   hasSession(): boolean {
     const token = localStorage.getItem('jwtToken');
     return !!token; 
@@ -30,6 +30,8 @@ export class FaServiceService {
 
   clearSession(): void {
     localStorage.removeItem('jwtToken');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('emailId');
   }
   
   
@@ -53,8 +55,8 @@ export class FaServiceService {
     return this.http.post(`${this.url}/contactUs`, data)
   }
 
-  getUserDetails () {
-    return this.http.get(`${this.url}/getLoginData`)
+  getUserDetails(offset: number, limit: number, searchTerm: string) {
+    return this.http.get(`${this.url}/getLoginData?page=${offset}&pageSize=${limit}&searchTerm=${searchTerm}`);
   }
 
   getFeedData () {

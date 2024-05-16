@@ -9,15 +9,6 @@ import { FaServiceService } from '../services/fa-service.service';
 export class AvEnginnerComponent implements OnInit {
   constructor(private faService : FaServiceService) {}
   ngOnInit(): void {
-    this.setSession();
-  }
-
-  setSession() {
-  this.faService.getSession().subscribe(
-    (response) => {
-      const token = response.session[0].jwtToken;
-      this.faService.setSession(token);
-})
   }
 
   }

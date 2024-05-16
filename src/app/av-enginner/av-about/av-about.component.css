@@ -340,7 +340,25 @@
   color: #0062cc;
 }
 
+input,option, select,
+input:focus {
+  background-color: white !important;
+  border: 1px solid white !important;
+  outline: none !important; 
+}
 
+.profile-edit-btn {
+  padding: 5px;
+  color: white;
+}
+
+.save-mode {
+  background-color: green!important;
+}
+
+.edit-mode {
+  background-color: blue!important;
+}
 
 .header-boxs {
   max-width: 97%;

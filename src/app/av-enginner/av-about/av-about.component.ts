@@ -17,100 +17,89 @@ export class AvAboutComponent implements OnInit {
   userCity!: string
   companyName: any
   userEmailId: any
-  jobTitle: any;
+  jobTitle: any
   userName: any
+  imagePath: any
   products: any[] = []
-  showSpinner: boolean = false;
+  showSpinner: boolean = false
+  editMode: boolean = false
 
   constructor (
     private userService: UserServicesService,
-    private authService: AuthServiceService,private faService : FaServiceService,
+    private authService: AuthServiceService,
+    private faService: FaServiceService,
     private datePipe: DatePipe
   ) {
-    this.emailId = authService.getLoggedInEmail()
+    this.emailId = localStorage.getItem('emailId')
   }
 
-  ngOnInit(): void {
-    this.getProfileImage();
-    this.getProfileData();
-  }
-  
-  getProfileData() {
-    this.showSpinner = true;
-    this.userService.getProfile(this.emailId).subscribe((response: any) => {
-      console.log(response);
-      this.showSpinner = false;
-      if (response.records.length !== 0) {
-        const record = response.records[0];
-        this.userName = record.userName || "not updated";
-        this.userEmailId = record.userEmailId || "not updated";
-        this.mobileNumber = (record.stdCode && record.mobileNumber) ? record.stdCode + '' + record.mobileNumber : "not updated";
-        this.dateOfBirth = record.dob || "not updated";
-        this.gender = record.gender || "not updated";
-        this.userCity = (record.city && record.state) ? record.city + ',' + record.state : "not updated";
-        this.jobTitle = record.jobTitle || "not updated";
-        this.companyName = record.companyName || "not updated";
-      } else {
-        this.getSignUp(); // Call getSignUp() if no records found
-      }
-    });
-  }
-  
-  getSignUp() {
-    this.showSpinner = true;
-    this.faService.getLoginData(this.emailId).subscribe((response: any) => {
-      console.log(response);
-      this.showSpinner = false;
-      if (response.records.length !== 0) {
-        const record = response.records[0];
-        this.userName = record.userName || "not updated";
-        this.userEmailId = record.emailId || "not updated";
-        this.mobileNumber = "not updated";
-        this.dateOfBirth = "not updated";
-        this.gender = "not updated";
-        this.userCity = "not updated";
-        this.jobTitle = "not updated";
-        this.companyName = "not updated";
-      } else {
-        // If no records found in getSignUp(), set default values
-        this.userName = "not updated";
-        this.userEmailId = "not updated";
-        this.mobileNumber = "not updated";
-        this.dateOfBirth = "not updated";
-        this.gender = "not updated";
-        this.userCity = "not updated";
-        this.jobTitle = "not updated";
-        this.companyName = "not updated";
-      }
-    });
-  }
-  
-
-
-  getProfileImage () {
-    this.showSpinner = true;
-    this.userService.getProfileImage(this.emailId).subscribe((response: any) => {
-        console.log(response)
-        this.showSpinner = false;
-        this.products = response.records
-      })
+  ngOnInit (): void {
+    this.getProfileData()
   }
 
-  getImageSource (): string {
-    this.showSpinner = true
-    if (this.products && this.products.length > 0) {
-      this.showSpinner = false
-      return this.products[0].imagePath
-    } else {
-      this.showSpinner = false
-      return '../assets/img/blank-user-directory.png'
+  toggleEditMode () {
+    this.editMode = !this.editMode
+    if (!this.editMode) {
+      this.saveProfileData()
     }
+  }
+  getProfileData () {
+    this.showSpinner = true
+    this.userService.getProfile(this.emailId).subscribe((response: any) => {
+      console.log(response)
+      this.showSpinner = false
+      if (response.records.length !== 0) {
+        const record = response.records[0]
+        this.imagePath = record.imagePath
+        this.userName = record.fullName || 'not updated'
+        this.emailId = record.emailId || 'not updated'
+        this.mobileNumber = record.mobileNumber || 'not updated'
+        this.dateOfBirth = record.dob || 'not updated'
+        this.gender = record.gender || 'not updated'
+        this.userCity = record.location || 'not updated'
+        this.jobTitle = record.designation || 'not updated'
+        this.gender = record.gender || 'not updated'
+      }
+    })
+  }
+
+  saveProfileData () {
+    this.showSpinner = true
+    const profileData = new FormData()
+
+    // Append values only if they are not "not updated"
+    if (this.emailId !== 'not updated')
+      profileData.append('emailId', this.emailId || '')
+    if (this.mobileNumber !== 'not updated')
+      profileData.append('mobileNumber', this.mobileNumber || '')
+    if (this.jobTitle !== 'not updated')
+      profileData.append('designation', this.jobTitle || '')
+    if (this.dateOfBirth !== 'not updated')
+      profileData.append('dob', this.dateOfBirth || '')
+    if (this.userCity !== 'not updated')
+      profileData.append('location', this.userCity || '')
+    if (this.gender !== 'not updated')
+      profileData.append('gender', this.gender || '')
+
+    console.log(profileData)
+
+    this.userService.updateProfile(profileData).subscribe(
+      (response: any) => {
+        console.log(response)
+        this.showSpinner = false
+        window.location.reload()
+      },
+      (error: any) => {
+        this.showSpinner = false
+        console.error('Error occurred while saving profile:', error)
+      }
+    )
   }
 
   formatDOB (dob: any) {
-    if(dob) {
-    return this.datePipe.transform(dob, 'dd MMMM yyyy')
+    if (dob) {
+      return this.datePipe.transform(dob, 'dd MMMM yyyy')
+    }
+    return ''
   }
-   return '';
-}
 }

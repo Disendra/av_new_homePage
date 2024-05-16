@@ -9,6 +9,7 @@ import {
   GoogleLoginProvider,
   SocialAuthService
 } from '@abacritt/angularx-social-login'
+import { HttpClient } from '@angular/common/http'
 
 @Component({
   selector: 'app-login-page',
@@ -23,16 +24,16 @@ export class LoginPageComponent implements OnInit {
   constructor (
     private route: ActivatedRoute,
     private router: Router,
-    private faService: FaServiceService
+    private faService: FaServiceService,
+    private http: HttpClient
   ) {}
 
   ngOnInit () {
+    this.route.params.subscribe(params => {
+      this.receivedValue = params['value']
+    })
     if (this.faService.hasSession()) {
-      this.router.navigate(['/avEngineer-dashboard'])
-    } else {
-      this.route.params.subscribe(params => {
-        this.receivedValue = params['value']
-      })
+      this.redirectedPath()
     }
   }
 
@@ -41,6 +42,16 @@ export class LoginPageComponent implements OnInit {
       window.location.href = `http://localhost:3000/auth/google?destination=${this.receivedValue}`
     } else if (type === 'linkedIn') {
       window.location.href = `http://localhost:3000/auth/linkedin?destination=${this.receivedValue}`
+    }
+  }
+
+  redirectedPath () {
+    if (this.receivedValue === 'avEngineer-dashboard') {
+      this.router.navigate(['/avEngineer-dashboard'])
+    } else if (this.receivedValue === 'ekart-page') {
+      this.router.navigate(['/ekart-page'])
+    } else if (this.receivedValue === 'av-community') {
+      this.router.navigate(['/av-community'])
     }
   }
 }

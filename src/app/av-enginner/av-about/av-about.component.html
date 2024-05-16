@@ -64,7 +64,7 @@
           <div class="row">
               <div class="col-md-4">
                   <div class="profile-img">
-                    <img src="https://media.licdn.com/dms/image/D5603AQEZg5Kpp8wSqw/profile-displayphoto-shrink_100_100/0/1712027407850?e=2147483647&v=beta&t=vOnRexNswr4KxcWr1hbMeW-Nw6AcqkFOfxnntI5xXjU" alt="" width="200" style="border-radius: 50%; border: 2px solid #ccc; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);"/>
+                    <img [src]="imagePath" alt="" width="200" style="border-radius: 50%; border: 2px solid #ccc; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);"/>
 
                       <!-- <div class="file btn btn-lg btn-primary">
                           Change Photo
@@ -74,94 +74,109 @@
               </div>
               <div class="col-md-6">
                   <div class="profile-head">
-                      <h2> Disendra Gosu</h2>
-                      <h4>Software Developer</h4>
+                      <h2> {{ userName }}</h2>
+                      <h4>{{ jobTitle }}</h4>
                       <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                       <ul class="nav nav-tabs" id="myTab" role="tablist">
                           <li class="nav-item">
-                              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                              <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">About</a>
                           </li>
                       </ul>
                   </div>
               </div>
               <div class="col-md-2">
-                  <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-              </div>
+                <button type="button" class="profile-edit-btn" (click)="toggleEditMode()" [class.save-mode]="editMode" [class.edit-mode]="!editMode">{{ editMode ? 'Save' : 'Edit' }}</button>
+             </div>
           </div>
           <div class="row">
               <div class="col-md-4">
-                  <div class="profile-work">
+                  <!-- <div class="profile-work">
                       <p>WORK LINK</p>
                       <a href="">Website Link</a><br/>
                       <a href="">Bootsnipp Profile</a><br/>
                       <a href="">Bootply Profile</a>
-                  </div>
+                  </div> -->
               </div>
               <div class="col-md-8" style="margin-top: -20px;">
-                  <div class="tab-content profile-tab" id="myTabContent">
-                      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                          <div class="row">
-                              <div class="col-md-6">
-                                  <label>Name</label>
-                              </div>
-                              <div class="col-md-6">
-                                  <p>Disendra Gosu</p>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-6">
-                                  <label>Emails Id</label>
-                              </div>
-                              <div class="col-md-6">
-                                  <p>disendra889@gmail.com</p>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-6">
-                                  <label>Mobile Number</label>
-                              </div>
-                              <div class="col-md-6">
-                                  <p>8919484183</p>
-                              </div>
-                          </div>
-                          <div class="row">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Name</label>
+                            </div>
+                            <div class="col-md-6 mb-0">
+                                <input type="text" disabled  [(ngModel)]="userName" name="userNameInput" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email Id</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" disabled [(ngModel)]="emailId" name="emailIdInput" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Mobile Number</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="tel" [disabled]="!editMode" [(ngModel)]="mobileNumber" name="mobileNumberInput" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
                             <div class="col-md-6">
                                 <label>Desination</label>
                             </div>
                             <div class="col-md-6">
-                                <p>Software Developer</p>
+                                <input type="text" [disabled]="!editMode" [(ngModel)]="jobTitle" name="jobTitleInput" class="form-control">
                             </div>
                         </div>
-                          <div class="row">
-                              <div class="col-md-6">
-                                  <label>DOB</label>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>DOB</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" [disabled]="!editMode" [ngModel]="formatDOB(dateOfBirth)" (ngModelChange)="dateOfBirth = $event" name="dateOfBirthInput" class="form-control">
                               </div>
-                              <div class="col-md-6">
-                                  <p>27-Dec-2000</p>
-                              </div>
-                          </div>
-                          <div class="row">
+                                                       
+                        </div>
+                        
+                        <div class="row">
                             <div class="col-md-6">
                                 <label>Location</label>
                             </div>
                             <div class="col-md-6">
-                                <p>Hyderabad</p>
+                                <input type="text" [disabled]="!editMode" [(ngModel)]="userCity" name="userCityInput" class="form-control">
                             </div>
                         </div>
+                        
                         <div class="row">
-                          <div class="col-md-6">
-                              <label>Gender</label>
-                          </div>
-                          <div class="col-md-6">
-                              <p>Male</p>
-                          </div>
-                      </div>
-                      </div>
-                  </div>
-              </div>
+                            <div class="col-md-6">
+                                <label>Gender</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select [disabled]="!editMode" [(ngModel)]="gender" name="genderInput" class="form-control">
+                                    <option>{{ gender }}</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
           </div>
       </form>
   </div>
   
 </body>
+
+
 </html>

@@ -61,6 +61,7 @@ import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { CommunityMyPostsComponent } from './community-page/community-my-posts/community-my-posts.component';
 import { GuidlinesComponent } from './home-page/guidlines/guidlines.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { RedirectPageComponent } from './redirect-page/redirect-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -98,7 +99,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     BussinessCardComponent,
     CommunityPageComponent,
     CommunityMyPostsComponent,
-    GuidlinesComponent
+    GuidlinesComponent,
+    RedirectPageComponent
   ],
   imports: [
     BrowserModule,

@@ -32,6 +32,7 @@ export class EkartComponent implements OnInit {
   showContact: boolean = false
   showFile: boolean = true
   showCart: boolean = false
+  empty_produts: boolean = false
   showProducts: boolean = true
   showSearch: boolean = false
   showContactForm: boolean = false
@@ -49,26 +50,16 @@ export class EkartComponent implements OnInit {
     private popup: PopupService,
     private userService: UserServicesService,
     private router: Router,
-    private faService : FaServiceService,
+    private faService: FaServiceService,
     private authService: AuthServiceService,
-    private authGuard : AuthGuardService
+    private authGuard: AuthGuardService
   ) {}
   ngOnInit (): void {
-    this.setSession();
-    this.emailId = this.authService.getLoggedInEmail()
-    this.userName = this.authService.getLoginuserName()
+    this.emailId = localStorage.getItem('emailId')
+    this.userName = localStorage.getItem('userName')
     this.getCartData(this.offset)
     this.getProfileImage()
   }
-
-  setSession() {
-  this.faService.getSession().subscribe(
-    (response) => {
-      const token = response.session[0].jwtToken;
-      this.faService.setSession(token);
-})
-  }
-
 
   loadMoreCartData () {
     this.offset += 5
@@ -107,6 +98,9 @@ export class EkartComponent implements OnInit {
       console.log(response)
       this.uploadProducts = this.uploadProducts.concat(response.records)
       this.showSpinner = false
+      if (response.records.length === 0) {
+        this.empty_produts = true
+      }
     })
   }
 
@@ -330,8 +324,8 @@ export class EkartComponent implements OnInit {
       (this.selectedFileName = '')
   }
 
-    logOut () {
-      this.faService.clearSession();
-      this.router.navigate(['/home-page']);
-    }
+  logOut () {
+    this.faService.clearSession()
+    this.router.navigate(['/home-page'])
   }
+}

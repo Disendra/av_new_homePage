@@ -20,7 +20,7 @@ export class AvDirectoryComponent implements OnInit {
   pagedUserData: any[] = []
   clickedUserData: any[] = []
   profileData: any[] = []
-  pageSize: number = 10
+  pageSize: number = 1
   companyName!: string
   profileImage: any[] = []
   showClickedData: boolean = false
@@ -38,78 +38,30 @@ export class AvDirectoryComponent implements OnInit {
   ) {}
 
   ngOnInit (): void {
-    this.getData()
+    this.getData(0,this.pageSize);
   }
 
-  getImageSource (): string {
-    this.showSpinner = true
-    if (this.profileImage && this.profileImage.length > 0) {
-      this.showSpinner = false
-      return this.profileImage[0].imagePath
-    } else {
-      this.showSpinner = false
-      return 'assets/img/empty_Image.png'
-    }
-  }
-
-  getData () {
-    this.showSpinner = true
-    this.faService.getUserDetails().subscribe((response: any) => {
+  getData(offset: number,limit: number) {
+    this.showSpinner = true;
+    this.faService.getUserDetails(offset, limit, this.filterTerm).subscribe((response: any) => {
       console.log('Response from server:', response)
       this.userData = response.records
       this.userEmailId = response.emailId
-      this.applyFilter() // Apply filter when data is fetched
-      this.updatePageData()
-      this.showSpinner = false
-      this.fetchProfileImages()
-    })
-    this.userService.getProfileData().subscribe((response: any) => {
-      console.log('Response from server:', response)
-      this.profileData = response.records
-    })
-  }
-
-  fetchProfileImages() {
-    this.userService.getUserImages().subscribe((response: any) => {
-      console.log(response)
-      const profileImages = response.records
-      this.userData.forEach(user => {
-        const profileImage = profileImages.find((profile: { emailId: any }) => profile.emailId === user.emailId)
-        const profileData = this.profileData.find((profile: { emailId: any }) => profile.emailId === user.emailId)
-  
-        if (profileImage) {
-          user.imagePath = profileImage.imagePath;
-        } else {
-          user.imagePath = '../assets/img/user-Icon.png';
-        }
-        
-        if (profileData) {
-          user.companyName = profileData.companyName;
-        }
-      })
-  
-      console.log(this.userData)
-      this.showSpinner = false
+      this.applyFilter();
+      this.showSpinner = false;
     })
   }
   
-  updatePageData () {
-    const startIndex = this.paginator.pageIndex * this.paginator.pageSize
-    this.pagedUserData = this.userData.slice(
-      startIndex,
-      startIndex + this.paginator.pageSize
-    )
-  }
-
   onPageChange (event: PageEvent) {
-    this.updatePageData()
+    const offset = event.pageIndex * event.pageSize;
+    this.getData(offset, event.pageSize);
   }
 
   applyFilter() {
     this.pagedUserData = this.userData.filter(
       item =>
-        item.userName.toLowerCase().includes(this.filterTerm.toLowerCase()) ||
-        item.role.toLowerCase().includes(this.filterTerm.toLowerCase())
+        item.fullName.toLowerCase().includes(this.filterTerm.toLowerCase()) 
+        // || item.designation.toLowerCase().includes(this.filterTerm.toLowerCase())
     );  
     if (this.pagedUserData.length > 0) {
       this.showFilters = true;
@@ -133,6 +85,7 @@ export class AvDirectoryComponent implements OnInit {
     this.showClickedData = true
     console.log('Clicked Item Details:', item)
     let emailId = item.emailId
+    this.imagePath = item.imagePath;
     this.userService
       .getSocialMediaProfile(emailId)
       .subscribe((response: any) => {
@@ -145,24 +98,6 @@ export class AvDirectoryComponent implements OnInit {
           this.linkedInUrl = records.linkedIn || null
         }
       })
-
-    this.userService.getProfile(emailId).subscribe((response: any) => {
-      this.showSpinner = false
-      let records = response.records[0]
-      if (response.records.length !== 0) {
-        this.companyName = records.companyName
-      }
-    })
-
-    this.userService.getProfileImage(emailId).subscribe((response: any) => {
-      this.showSpinner = false
-      let records = response.records[0]
-      if (response.records.length !== 0) {
-        this.imagePath = records.imagePath
-      } else {
-        this.imagePath = '../assets/img/blank-user-directory.png'
-      }
-    })
 
     this.clickedUserData = [item]
   }

@@ -42,7 +42,7 @@ export class AuthServiceService {
   markEmailAsOpened (emailTitle: string) {
     const openedEmails = this.getOpenedEmails()
     openedEmails.push(emailTitle)
-    sessionStorage.setItem(this.OPENED_EMAILS_KEY, JSON.stringify(openedEmails))
+    localStorage.setItem(this.OPENED_EMAILS_KEY, JSON.stringify(openedEmails))
   }
 
   isEmailOpened (emailTitle: string): boolean {
@@ -51,7 +51,7 @@ export class AuthServiceService {
   }
 
   private getOpenedEmails (): string[] {
-    const openedEmailsJSON = sessionStorage.getItem(this.OPENED_EMAILS_KEY)
+    const openedEmailsJSON = localStorage.getItem(this.OPENED_EMAILS_KEY)
     return openedEmailsJSON ? JSON.parse(openedEmailsJSON) : []
   }
 
