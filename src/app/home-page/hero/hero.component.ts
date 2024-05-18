@@ -16,7 +16,7 @@ constructor(private router : Router) { }
 
   carouselItems = [
     {
-      title: 'EKART',
+      title: 'AV KART',
       title_content: 'Your Ultimate AV Marketplace.',
       description: 'Dive into our vibrant AV marketplace, where enthusiasts come together to buy and sell high-quality, pre-loved audiovisual products. Explore a world of innovation and passion as you connect with like-minded individuals, all while unlocking incredible deals and opportunities to upgrade your AV setup.',
       link: '#'

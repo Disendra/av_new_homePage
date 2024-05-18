@@ -1,13 +1,6 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  TemplateRef,
-  ViewChild
-} from '@angular/core'
+import { Component,ElementRef, OnInit,TemplateRef,ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Router } from '@angular/router'
-import { ClientsComponent } from 'src/app/home-page/clients/clients.component'
 import { AuthGuardService } from 'src/app/services/auth-guard.service'
 import { AuthServiceService } from 'src/app/services/auth-service.service'
 import { FaServiceService } from 'src/app/services/fa-service.service'
@@ -57,8 +50,7 @@ export class AvHeaderComponent implements OnInit {
     private authService: AuthServiceService,
     private popup: PopupService,
     private userService: UserServicesService,
-    private faService: FaServiceService,
-    private authGuard: AuthGuardService
+    private faService: FaServiceService
   ) {
     this.userName = localStorage.getItem('userName')
     this.emailId = localStorage.getItem('emailId')
@@ -79,7 +71,12 @@ export class AvHeaderComponent implements OnInit {
 
   onClick (type: any) {
     if (type === 'community') {
-      this.router.navigate(['/av-community'])
+      window.open('/av-community', '_blank');
+      type = 'feed';
+    }
+    else if( type === 'ekart') {
+     window.open('/ekart-page', '_blank');
+     type = 'feed';
     }
     this.activeMenuItem = type
     this.isSimultor = type === 'simulator'
@@ -158,12 +155,6 @@ export class AvHeaderComponent implements OnInit {
         })
     }
     // this.getProfile()
-  }
-
-  getCart () {
-    const url = '/ekart-page'
-    const newTabUrl = this.router.serializeUrl(this.router.createUrlTree([url]))
-    window.open(newTabUrl, '_blank')
   }
 
   shareOnSocialMedia (media: string) {

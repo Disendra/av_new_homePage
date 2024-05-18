@@ -21,7 +21,7 @@
                 <img class="search_Image" [src]="item.imagePath">
                 <div class="d-flex flex-column ml-3">
                   <span class="Search_Name">{{ item.fullName }}</span>
-                  <span class="company_Name">{{ item.designation }}</span>
+                  <span class="company_Name">{{ item.companyName }}</span>
                   <!-- <small>{{ item.role }}</small> -->
                 </div>
               </div>
@@ -49,7 +49,7 @@
         <div class="icon arrow" *ngIf="showClickedData" (click)="onBack()"><i class="fas fa-arrow-left"></i></div>
         <div *ngFor="let item of clickedUserData">
           <div class="name">{{ item.fullName }}</div>
-          <div class="about">{{ item.designation }}</div>
+          <div class="about">{{ item.companyName }}</div>
         </div>
         <div class="social-icons">
           <a *ngIf="facebookUrl" [href]="facebookUrl" target="_blank" class="fb"><i class="fab fa-facebook-f"></i></a>

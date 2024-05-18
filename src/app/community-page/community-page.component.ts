@@ -7,6 +7,7 @@ import { UserServicesService } from '../services/user-services.service'
 import { CommunityService } from '../services/community.service'
 import { AuthGuardService } from '../services/auth-guard.service'
 import { FaServiceService } from '../services/fa-service.service'
+import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-community-page',
@@ -20,19 +21,23 @@ export class CommunityPageComponent {
   replyAnswer: any
   emailId: any;
   feedbackInfo : any;
+  pageType : any; 
   userName: any
-  currentPage = 1
-  pageSize = 5
+  currentPage : any;
+  pageSize : any;
   selectedFile: any
-  selectedFileName: any
+  selectedFileName: any;
+  likedQuestion : any;
   questionURl: any
   role: string = 'Av Engineeer'
   profileImg: any[] = []
   mainQuestions: any[] = []
   additionalAnswers: any[] = []
+  likedQuestionIds: number[] = [];
   expanded: boolean = false
   showUrlBox: boolean = false
-  showSearch: boolean = false
+  showSearch: boolean = false;
+  isHeader : boolean = true;
   showContactForm: boolean = false
   additionalAnswersVisible: boolean = false;
   showHomepage: boolean = true
@@ -53,22 +58,30 @@ export class CommunityPageComponent {
     private commintyService: CommunityService,
     private faService : FaServiceService,
     private userService: UserServicesService,
+    private datePipe: DatePipe,
     private authGuard : AuthGuardService
   ) {}
 
   ngOnInit (): void {
-    this.emailId = this.authService.getLoggedInEmail()
-    this.userName = this.authService.getLoginuserName()
+    // this.emailId = localStorage.getItem('emailId');
+    // this.userName = localStorage.getItem('userName');
+    this.emailId = 'gdisendra@gmail.com';
+    this.userName = 'Disendra';
     this.getProfileImage()
     this.onSelect('homePage')
   }
 
+
   onSelect (option: any): void {
+    this.pageType = option;
     this.currentPage = 1
     this.pageSize = 5
     if (option === 'homePage') {
-      this.showHomepage = true
-      this.getQuestions()
+      this.mainQuestions = []
+      this.showHomepage = true;
+      this.showMyposts = false;
+      this.getQuestions();
+      this.getLikesInfo();
     } else if (option === 'contact') {
       this.showContactForm = true
     } else if (option === 'myPosts') {
@@ -99,24 +112,47 @@ export class CommunityPageComponent {
       return '../assets/img/blank-user-directory.png'
     }
   }
+  
 
-  //Questions
-  getQuestions () {
-    this.showSpinner = true
-    this.commintyService
-      .getCommunityQuestions(
-        this.pageSize,
-        (this.currentPage - 1) * this.pageSize,
-        this.searchQuetion
-      )
-      .subscribe((response: any) => {
-        this.mainQuestions = [...this.mainQuestions, ...response.records]
-        console.log(response)
-        this.showSpinner = false
-      })
+  getSearchQuestions() {
+    this.currentPage = 1
+    this.pageSize = 5
+    this.mainQuestions = [];
+    if(this.pageType === 'homePage') {
+      alert('homePage');
+    this.getQuestions();
+    } else if (this.pageType === 'myPosts') {
+     alert('myPosts');
+     this.getUploadedQuestions();
+    }
   }
 
-  loadMore () {
+
+  //Questions
+ getQuestions() {
+  this.showSpinner = true;
+  this.commintyService.getCommunityQuestions(this.pageSize, (this.currentPage - 1) * this.pageSize, this.searchQuetion)
+    .subscribe((response: any) => {
+      const newRecords = response.records.filter((record: any) => 
+        !this.mainQuestions.some((question: any) => question.qId === record.qId)
+      );
+
+      this.mainQuestions = [...this.mainQuestions, ...newRecords];
+      console.log(response);
+      this.mainQuestions.forEach(question => {
+        question.isLiked = this.likedQuestionIds.includes(question.qId);
+        this.showContent(question);
+      });
+      
+      this.showSpinner = false;
+    },
+    (error: any) => {
+      console.error('Error fetching questions:', error);
+      this.showSpinner = false;
+    });
+}
+
+loadMore () {
     if (this.showHomepage) {
       this.currentPage++
       this.getQuestions()
@@ -125,22 +161,20 @@ export class CommunityPageComponent {
       this.getUploadedQuestions()
     }
   }
-
   //uplaod Questions
-
   getUploadedQuestions () {
     this.showSpinner = true
-    this.commintyService
-      .getUploadedCommunityQuestions(
-        this.emailId,
+    this.commintyService.getUploadedCommunityQuestions(this.emailId,
         this.pageSize,
         (this.currentPage - 1) * this.pageSize,
         this.searchQuetion
       )
       .subscribe((response: any) => {
-        console.log(response)
-        this.mainQuestions = [...this.mainQuestions, ...response.records]
-        this.showSpinner = false
+        this.mainQuestions = [...this.mainQuestions, ...response.records];
+        console.log(response);
+        response.records.forEach((question: any) => {
+          this.showContent(question); // Pass the entire question object
+        });
       })
   }
 
@@ -169,33 +203,6 @@ export class CommunityPageComponent {
         }
       })
   }
-
-  notifications = [
-    {
-      icon: 'bi-exclamation-circle text-warning',
-      title: 'Lorem Ipsum',
-      message: 'Quae dolorem earum veritatis oditseno',
-      timestamp: '30 min. ago'
-    },
-    {
-      icon: 'bi-x-circle text-danger',
-      title: 'Atque rerum nesciunt',
-      message: 'Quae dolorem earum veritatis oditseno',
-      timestamp: '1 hr. ago'
-    },
-    {
-      icon: 'bi-check-circle text-success',
-      title: 'Sit rerum fuga',
-      message: 'Quae dolorem earum veritatis oditseno',
-      timestamp: '2 hrs. ago'
-    },
-    {
-      icon: 'bi-info-circle text-primary',
-      title: 'Dicta reprehenderit',
-      message: 'Quae dolorem earum veritatis oditseno',
-      timestamp: '4 hrs. ago'
-    }
-  ]
 
   selectPhoto () {
     this.fileInput.nativeElement.click()
@@ -236,13 +243,13 @@ export class CommunityPageComponent {
     }
   }
 
-  uploadAnswer () {
+  uploadAnswer (qId:any) {
     this.showSpinner = true
     const formData = new FormData()
     formData.append('emailId', this.emailId)
     formData.append('answer', this.replyAnswer)
     formData.append('userName', this.userName)
-    formData.append('qId', this.expandedQuestion)
+    formData.append('qId', qId)
     this.commintyService
       .insertCommunityAnswer(formData)
       .subscribe((response: any) => {
@@ -258,38 +265,56 @@ export class CommunityPageComponent {
   }
 
   //ViewMore
-  showAdditionalAnswers (question: any) {
-    this.showSpinner = true
-    this.additionalAnswersVisibility[question.qId] =
-      !this.additionalAnswersVisibility[question.qId]
-    console.log(question)
-    let qId = question.qId
-    this.commintyService
-      .getMoreCommunityAnswers(qId)
-      .subscribe((response: any) => {
-        console.log(response)
-        this.additionalAnswersData[question.qId] = response.records
-        this.showSpinner = false
-      })
-  }
-
+  showAdditionalAnswers(question: any) {
+    this.showSpinner = true;
+    this.additionalAnswersVisibility[question.qId] = !this.additionalAnswersVisibility[question.qId];
+    if (!this.additionalAnswersData[question.qId]) {
+        console.log(question);
+        this.commintyService.getMoreCommunityAnswers(question.qId).subscribe((response: any) => {
+            console.log(response);
+            this.additionalAnswersData[question.qId] = response.records;
+            console.log( this.additionalAnswersData[question.qId]);
+            this.performActions(question, 'view');
+            this.showSpinner = false;
+        });
+    } else {
+        // this.performActions(question, 'view');
+        this.showSpinner = false;
+    }
+}
 
 
   showContent(question: any) {
-    if (!this.showFullContent[question.qId]) {
-      this.commintyService.getFeedback(question.qId).subscribe((response: any) => {
+    this.commintyService.getFeedback(question.qId)
+      .subscribe((response: any) => {
         console.log(response);
-        this.feedbackInfo = response.records;
-        this.showFullContent[question.qId] = !this.showFullContent[question.qId];
+        question.feedbackInfo = response.records;
         this.showSpinner = false;
-        this.performActions(question.qId, 'view');
+        // this.performActions(question.qId, 'view');
       });
-    } else {
-      this.showFullContent[question.qId] = !this.showFullContent[question.qId];
-    }
   }
   
+  //like operations
 
+  getLikesInfo() {
+    this.showSpinner = true;
+    this.commintyService.getLikesInfo(this.emailId).subscribe(
+      (response: any) => {
+        console.log(response);
+        // Map the liked question IDs from the response
+        this.likedQuestionIds = response.records.map((record: any) => record.qId) || [];
+        this.showSpinner = false;
+        // Fetch questions only after likes information is retrieved
+        this.getQuestions();
+      },
+      (error: any) => {
+        console.error('Error fetching likes info:', error);
+        this.likedQuestionIds = [];
+        this.showSpinner = false;
+      }
+    );
+  }
+  
   toggleSearch () {
     this.showSearch = !this.showSearch
   }
@@ -350,21 +375,26 @@ export class CommunityPageComponent {
 
 
 //Like and Dislikes operations
-
-performActions(questionId: number, type: string) {
+performActions(question: any, type: string) {
   this.showSpinner = true;
   const data = {
-    "qId": questionId,
+    "qId": question.qId,
     "emailId": this.emailId,
-    "action": type // Adding action type ('like' or 'dislike')
+    "action": type
   };
-
+  if (type === 'like' && this.likedQuestionIds.includes(question.qId)) {
+    this.showSpinner = false;
+    return;
+  }
   let serviceCall;
   serviceCall = this.commintyService.postFeedback(data);
-
-  serviceCall.subscribe(
-    (response:any) => {
+  serviceCall.subscribe((response:any) => {
       console.log('Response from server:', response);
+      this.showContent(question);
+      if (type === 'like') {
+        question.isLiked = true;
+        this.likedQuestionIds.push(question.qId);
+      }
       this.showSpinner = false;
     },
     (error:any) => {
@@ -404,6 +434,13 @@ private handleError(error: any) {
   onBack () {
     this.onSelect('homePage')
     window.scrollTo(0, 0)
+  }
+
+  formatDOB (dob: any) {
+    if (dob) {
+      return this.datePipe.transform(dob, 'dd MMMM yyyy')
+    }
+    return ''
   }
 
   logOut () {

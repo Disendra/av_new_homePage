@@ -148,6 +148,10 @@ a {
     }
 } */
 
+html, body {
+    font-family: 'Poppins', sans-serif!important;
+}
+
 .no-records {
     width: 450px;
 }

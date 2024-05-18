@@ -7,7 +7,7 @@ import { PopupService } from 'src/app/services/popup.service'
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
   personName: any
   emailId: any
   mobileNumber: any
@@ -15,15 +15,24 @@ export class ContactComponent {
   message: any;
   errorMsg : any;
   alertSymbol! : string;
+  @Input() header: any;
   captchaResponse: string = '';
   buttonType : string = '';
   showErrors : boolean = false;
   showSuccess : boolean = false;
+  isHeader : boolean = true;
   showSpinner : boolean = false;
   captchaResolved : boolean = false;
   @ViewChild('myDialog') myDialog!: TemplateRef<any>  
   @ViewChild('captcha') captcha!: TemplateRef<any>
   constructor (private faService: FaServiceService,  private popup: PopupService) {}
+    
+  ngOnInit(): void {
+      alert(this.header);
+      if(this.header) {
+        this.isHeader = false
+      }
+  }
   
   onSubmit() {
     this.showSpinner = true;

@@ -99,13 +99,24 @@
               </div>
               <div class="col-md-8" style="margin-top: -20px;">
                 <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">                   
+
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Name</label>
+                                <label>Company Name</label>
                             </div>
                             <div class="col-md-6 mb-0">
-                                <input type="text" disabled  [(ngModel)]="userName" name="userNameInput" class="form-control">
+                                <input type="text" [disabled]="!editMode"  [(ngModel)]="companyName" name="userNameInput" class="form-control">
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Desination</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" [disabled]="!editMode" [(ngModel)]="jobTitle" name="jobTitleInput" class="form-control">
                             </div>
                         </div>
                         
@@ -126,23 +137,15 @@
                                 <input type="tel" [disabled]="!editMode" [(ngModel)]="mobileNumber" name="mobileNumberInput" class="form-control">
                             </div>
                         </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Desination</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" [disabled]="!editMode" [(ngModel)]="jobTitle" name="jobTitleInput" class="form-control">
-                            </div>
-                        </div>
-                        
+
+
                         <div class="row">
                             <div class="col-md-6">
                                 <label>DOB</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" [disabled]="!editMode" [ngModel]="formatDOB(dateOfBirth)" (ngModelChange)="dateOfBirth = $event" name="dateOfBirthInput" class="form-control">
-                              </div>
+                                <input type="date" [disabled]="!editMode" [ngModel]="formatDOB(dateOfBirth)" (ngModelChange)="dateOfBirth = $event" name="dateOfBirthInput" class="form-control">
+                            </div>
                                                        
                         </div>
                         

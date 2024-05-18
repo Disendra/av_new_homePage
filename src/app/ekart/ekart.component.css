@@ -529,11 +529,6 @@ li::marker {
   margin-bottom: 8px;
 }
 
-/* 
-.arrow_Container {
-  padding-left: 1%;
-  margin-top: 5%;
-} */
 
 span {
   color: black;
@@ -700,12 +695,6 @@ textarea {
   margin-left: 13%;
 }
 
-.contact_Back {
-  margin-left: 2%;
-  margin-top: 5%;
-  margin-bottom: -4%;
-}
-
 @media (max-width: 767px) {
   .post_ad {
     display: none;
@@ -716,12 +705,4 @@ textarea {
     margin-right: 10px;
   }
 
-  /* .arrow_Container {
-    margin-top: 15%;
-  } */
-
-  .contact_Back {
-    margin-top: 15%;
-    margin-bottom: -10%;
-  }
 }

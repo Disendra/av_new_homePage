@@ -22,7 +22,8 @@ export class EkartComponent implements OnInit {
   selectedFile: any
   mobileNumber!: number
   selectedFileName: any
-  slNo!: number
+  slNo!: number;
+  isHeader : boolean = true;
   price!: number
   products: any[] = []
   uploadProducts: any[] = []

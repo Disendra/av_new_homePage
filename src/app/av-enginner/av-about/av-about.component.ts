@@ -52,6 +52,7 @@ export class AvAboutComponent implements OnInit {
         const record = response.records[0]
         this.imagePath = record.imagePath
         this.userName = record.fullName || 'not updated'
+        this.companyName = record.companyName || 'not updated'
         this.emailId = record.emailId || 'not updated'
         this.mobileNumber = record.mobileNumber || 'not updated'
         this.dateOfBirth = record.dob || 'not updated'
@@ -66,10 +67,10 @@ export class AvAboutComponent implements OnInit {
   saveProfileData () {
     this.showSpinner = true
     const profileData = new FormData()
-
-    // Append values only if they are not "not updated"
     if (this.emailId !== 'not updated')
-      profileData.append('emailId', this.emailId || '')
+      profileData.append('emailId', this.emailId || '');
+    if (this.companyName !== 'not updated')
+      profileData.append('companyName', this.companyName || '')
     if (this.mobileNumber !== 'not updated')
       profileData.append('mobileNumber', this.mobileNumber || '')
     if (this.jobTitle !== 'not updated')
@@ -98,7 +99,7 @@ export class AvAboutComponent implements OnInit {
 
   formatDOB (dob: any) {
     if (dob) {
-      return this.datePipe.transform(dob, 'dd MMMM yyyy')
+      return this.datePipe.transform(dob, 'yyyy-MM-dd')
     }
     return ''
   }

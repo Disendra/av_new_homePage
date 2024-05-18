@@ -40,6 +40,9 @@ export class CommunityService {
     return this.http.get<any>(`${this.url}/getFeedback/${qId}`);
   }
 
+  getLikesInfo(emailId:any) {
+    return this.http.get<any>(`${this.url}/getLikesInfo/${emailId}`);
+  }
 
   insertCommunity (data: FormData) {
     return this.http.post(`${this.url}/insertCommunity`, data)
