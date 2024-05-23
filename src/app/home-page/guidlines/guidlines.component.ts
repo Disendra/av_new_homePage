@@ -18,15 +18,18 @@ export class GuidlinesComponent implements OnInit {
     }, 2000)
 
     let route = this.route.snapshot.url.join('/')
-    alert(route)
     this.getFiles(route)
   }
 
   getFiles (route: any) {
     if (route === 'privacy-policy') {
-      this.filePath = './assets/guideLines/Privacy-policy.pdf'
+      this.filePath = './assets/guideLines/privacy_policy.pdf'
+    } else if (route === 'accept-policy') {
+      this.filePath = './assets/guideLines/Accept_use_policy.pdf'
+    } else if (route === 'platform-policy') {
+      this.filePath = './assets/guideLines/platform_policy.pdf'
     } else if (route === 'cookie-policy') {
-      this.filePath = './assets/guideLines/cookie-Policy.pdf'
+      this.filePath = './assets/guideLines/cookie_policy.pdf'
     }
   }
 }

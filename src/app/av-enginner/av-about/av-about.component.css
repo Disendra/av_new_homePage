@@ -52,15 +52,15 @@
 }
 
 .proile-rating {
-  font-size: 12px;
-  color: #818182;
-  margin-top: 5%;
+  font-size: 15px;
+    /* color: #818182; */
+    font-weight: 500;
+    margin-top: 5%;
 }
 
 .proile-rating span {
-  color: #495057;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .profile-head .nav-tabs {

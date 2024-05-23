@@ -1,9 +1,29 @@
 // app-btu-calculator.component.ts
 
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
-import { MatDialog } from '@angular/material/dialog'
+import {
+  Component,
+  Input,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+  signal
+} from '@angular/core'
+import { FullCalendarComponent } from '@fullcalendar/angular'
+import {
+  CalendarOptions,
+  DateSelectArg,
+  EventApi,
+  EventClickArg,
+  EventInput
+} from '@fullcalendar/core'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import interactionPlugin from '@fullcalendar/interaction'
+import listPlugin from '@fullcalendar/list'
 import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
+import { an, dA } from '@fullcalendar/core/internal-common'
+import { FaServiceService } from 'src/app/services/fa-service.service'
 import { PopupService } from 'src/app/services/popup.service'
 @Component({
   selector: 'app-btu-calculator',
@@ -15,6 +35,10 @@ export class BtuCalculatorComponent implements OnInit {
   isBtu: boolean = false
   ispowerCal: boolean = false
   isDialogOpen: boolean = false
+  isCalender: boolean = false
+  showSpinner: boolean = true
+  startDate: any
+  endDate: any
   dialogRef: any
   qrdata: any
   total: number = 0
@@ -23,8 +47,17 @@ export class BtuCalculatorComponent implements OnInit {
   totalkWh: number = 0
   requiredCooling: any
   @Input() toolType: any
+  calendarVisible = true // Default to true
+  currentEvents: EventApi[] = []
+  events: any[] = []
+  @ViewChild('myDialog') myDialog!: TemplateRef<any>
 
-  constructor () {}
+  constructor (
+    private faService: FaServiceService,
+    private popup: PopupService
+  ) {
+    this.handleCreateEventClick = this.handleCreateEventClick.bind(this)
+  }
 
   btuRows = [
     { company: '', equipment: '', watt: 0 },
@@ -36,6 +69,12 @@ export class BtuCalculatorComponent implements OnInit {
     { equipment: '', current: 0, voltage: 0, watt: 0 },
     { equipment: '', current: 0, voltage: 0, watt: 0 }
   ]
+
+  ngOnInit (): void {
+    this.handleMessageChange()
+    this.calculateTotalWatt()
+    this.getEvents()
+  }
 
   getRowClass (index: number): string {
     return index % 2 === 0 ? 'even-row' : 'odd-row'
@@ -93,13 +132,11 @@ export class BtuCalculatorComponent implements OnInit {
 
   calculateTotalWatt () {
     this.totalPowerCol = this.powerCalRows.reduce((sum, row) => {
-      // Calculate the wattage for each row
       row.watt = row.current * row.voltage
       return sum + Number(row.watt)
     }, 0)
 
     this.total = this.btuRows.reduce((sum, row) => sum + Number(row.watt), 0)
-    // this.watts =
     this.totalPowerCol = this.powerCalRows.reduce(
       (sum, row) => sum + Number(row.watt),
       0
@@ -109,14 +146,84 @@ export class BtuCalculatorComponent implements OnInit {
     this.requiredCooling = this.thermalTotal / 12000
   }
 
-  ngOnInit (): void {
-    this.handleMessageChange()
-    this.calculateTotalWatt()
+  //Calender
+  getEvents () {
+    this.showSpinner = true
+    this.faService.getEvents().subscribe((response: any) => {
+      console.log('Response from server:', response)
+      const newEvents = response.records.map((record: any) => ({
+        title: record.event_name,
+        start: record.event_date,
+        url: record.website_Url
+      }))
+      this.events = newEvents
+      this.updateCalendarEvents()
+      this.showSpinner = false
+    })
+  }
+
+  updateCalendarEvents () {
+    this.calendarOptions.events = this.events
+  }
+
+  handleCalendarToggle () {
+    this.calendarVisible = !this.calendarVisible
+  }
+
+  calendarOptions: CalendarOptions = {
+    plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
+    headerToolbar: {
+      left: 'prev,next createEventButton',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    },
+    initialView: 'dayGridMonth',
+    weekends: true,
+    editable: true,
+    selectable: true,
+    selectMirror: true,
+    dayMaxEvents: true,
+    events: [],
+    eventClick: this.handleEventClick.bind(this),
+    customButtons: {
+      createEventButton: {
+        text: 'Add Post',
+        click: () => this.handleCreateEventClick()
+      }
+    }
+  }
+
+  handleCreateEventClick = () => {
+    this.popup.openDialogWithTemplateRef(this.myDialog)
+  }
+
+  handleEventClick (info: EventClickArg) {
+    if (info.event.url) {
+      window.open(info.event.url, '_blank')
+    }
+  }
+
+  submitForm (
+    eventName: string,
+    eventUrl: string,
+    startDate: Date,
+    endDate: Date
+  ) {
+    const data = {
+      eventName: eventName,
+      eventUrl: eventUrl,
+      startDate: startDate,
+      endDate: endDate
+    }
+    this.faService.postEvent(data).subscribe(response => {
+      console.log(response)
+    })
   }
 
   handleMessageChange () {
     this.isBtu = this.toolType === 'btu'
     this.ispowerCal = this.toolType === 'ispowerCal'
+    this.isCalender = this.toolType === 'calender'
   }
 
   downloadReport (option: any) {

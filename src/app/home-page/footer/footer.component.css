@@ -135,7 +135,7 @@ footer {
 }
 
 .menu_button {
-    font-weight: bold;
+    font-weight: 500;
     color: black;
     font-size: 18px;
 }
@@ -256,3 +256,19 @@ footer {
 .widget_menu ul li a:hover {
     color: blue !important;
 }
+
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
+@media screen and (max-width: 768px) { 
+    .wrapper .icon {
+         height: 25px;
+         width: 25px;
+     }
+  }

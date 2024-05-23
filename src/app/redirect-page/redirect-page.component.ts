@@ -22,7 +22,7 @@ export class RedirectPageComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.receivedValue = params['value']
     })
-    this.setSession()
+    this.setSession();
   }
 
   setSession () {

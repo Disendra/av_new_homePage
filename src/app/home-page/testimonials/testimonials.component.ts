@@ -8,16 +8,16 @@ import { Component } from '@angular/core';
 export class TestimonialsComponent {
   carouselItems = [
     {
-      name: 'Anna Trevor',
-      role: 'Customer',
-      description: 'Dignissimos reprehenderit repellendus nobis error quibusdam? Atque animi sint unde quis reprehenderit, et, perspiciatis, debitis totam est deserunt eius officiis ipsum ducimus ad labore modi voluptatibus accusantium sapiente nam! Quaerat.',
-      imageUrl: '/assets/img/client.jpg'
+      name: 'Harish N',
+      role: 'AV Engineer',
+      description: 'The AV CHAMPS Group is a dynamic community consisting of seasoned professionals and experts from the AV industry. Within this group, members leverage their collective knowledge and diverse experiences. " HAPPY TO BE A PART OF THIS NETWORK" !',
+      imageUrl: '/assets/img/testimonials/harish.jpeg'
     },
-    {
-      name: 'Anna Trevor',
-      role: 'Customer',
-      description: 'Dignissimos reprehenderit repellendus nobis error quibusdam? Atque animi sint unde quis reprehenderit, et, perspiciatis, debitis totam est deserunt eius officiis ipsum ducimus ad labore modi voluptatibus accusantium sapiente nam! Quaerat.',
-      imageUrl: '/assets/img/client.jpg'
+    {   
+      name: 'Vishnu Vardhan',
+      role: 'AV Engineer',
+      description: 'Whether it’s discussing the latest AV innovations or troubleshooting technical challenges, the AV CHAMPS provides a supportive platform for professionals to learn, grow, and succeed in the dynamic world of audiovisual technology. "THANK YOU AV CHAMPS" !',
+      imageUrl: '/assets/img/testimonials/vishnu.jpeg'
     },
   ];
 }

@@ -7,4 +7,17 @@ import { Component } from '@angular/core';
 })
 export class ClientsComponent {
 
+
+  images = [ 
+    'assets/img/clients/zoapi_img.png',
+    'assets/img/clients/At_img.png',
+    // 'assets/img/clients/letsving.png',
+    'assets/img/clients/babbler_img.png',
+    'assets/img/clients/zoapi_img.png',
+    'assets/img/clients/At_img.png',
+    // 'assets/img/clients/letsving.png',
+    'assets/img/clients/babbler_img.png'
+  ];
+
+
 }

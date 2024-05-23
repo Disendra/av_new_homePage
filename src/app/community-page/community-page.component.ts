@@ -28,8 +28,7 @@ export class CommunityPageComponent {
   selectedFile: any
   selectedFileName: any;
   likedQuestion : any;
-  questionURl: any
-  role: string = 'Av Engineeer'
+  questionURl: any;
   profileImg: any[] = []
   mainQuestions: any[] = []
   additionalAnswers: any[] = []

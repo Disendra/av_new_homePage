@@ -15,6 +15,7 @@ export class AvCalculatorComponent {
   isSpl : boolean = false;
   isMacFinder : boolean = false
   cards: boolean = true;
+  isCalender : boolean = false;
   toolType: string = '';
 
   constructor () {
@@ -30,5 +31,6 @@ export class AvCalculatorComponent {
     this.ispowerCal = this.toolType === 'ispowerCal';
     this.isSpl = this.toolType === 'isSpl';
     this.isMacFinder = this.toolType === 'macFinder';
+    this.isCalender = this.toolType === 'calender';
   }
 }

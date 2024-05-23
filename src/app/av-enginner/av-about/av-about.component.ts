@@ -17,7 +17,8 @@ export class AvAboutComponent implements OnInit {
   userCity!: string
   companyName: any
   userEmailId: any
-  jobTitle: any
+  jobTitle: any;
+  signupDate : any;
   userName: any
   imagePath: any
   products: any[] = []
@@ -50,7 +51,8 @@ export class AvAboutComponent implements OnInit {
       this.showSpinner = false
       if (response.records.length !== 0) {
         const record = response.records[0]
-        this.imagePath = record.imagePath
+        this.imagePath = record.imagePath;
+        this.signupDate = record.signupDate || 'not updated'
         this.userName = record.fullName || 'not updated'
         this.companyName = record.companyName || 'not updated'
         this.emailId = record.emailId || 'not updated'
@@ -97,8 +99,14 @@ export class AvAboutComponent implements OnInit {
     )
   }
 
+  formattedDate() {
+    return this.datePipe.transform(this.signupDate, 'yyyy-MM-dd HH:mm:ss', 'UTC');
+  }
+
   formatDOB (dob: any) {
-    if (dob) {
+    if(dob === 'not updated') {
+      return;
+    } else if (dob) {
       return this.datePipe.transform(dob, 'yyyy-MM-dd')
     }
     return ''

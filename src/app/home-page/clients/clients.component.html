@@ -9,14 +9,9 @@
 
     <div class="clients-slider swiper" >
       <div class="swiper-wrapper align-items-center">
-        <div class="swiper-slide"><img src="assets/img/home-page/coming-soon.png" class="img-fluid" alt=""></div>
-        <div class="swiper-slide"><img src="assets/img/home-page/coming-soon.png" class="img-fluid" alt=""></div>
-        <div class="swiper-slide"><img src="assets/img/home-page/coming-soon.png" class="img-fluid" alt=""></div>
-        <div class="swiper-slide"><img src="assets/img/home-page/coming-soon.png" class="img-fluid" alt=""></div>
-        <div class="swiper-slide"><img src="assets/img/home-page/coming-soon.png" class="img-fluid" alt=""></div>
-        <div class="swiper-slide"><img src="assets/img/home-page/coming-soon.png" class="img-fluid" alt=""></div>
-        <div class="swiper-slide"><img src="assets/img/home-page/coming-soon.png" class="img-fluid" alt=""></div>
-
+        <div class="swiper-slide" *ngFor="let image of images">
+          <img [src]="image" class="img-fluid" alt="">
+        </div> 
       </div>
       <div class="swiper-pagination"></div>
     </div>

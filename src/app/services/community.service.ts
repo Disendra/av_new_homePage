@@ -6,10 +6,10 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class CommunityService {
-   url = 'http://localhost:3000'
+  //  url = 'http:// 192.168.29.47:3000'
   // url = 'http://10.0.0.68:3000';
   // url = 'http://10.0.0.68:3000'
-  // url = 'https://av-nodejs.onrender.com'
+  url = 'https://av-nodejs.onrender.com'
 
   constructor (private http: HttpClient) {}
 

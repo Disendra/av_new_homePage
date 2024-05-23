@@ -62,6 +62,8 @@ import { CommunityMyPostsComponent } from './community-page/community-my-posts/c
 import { GuidlinesComponent } from './home-page/guidlines/guidlines.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { RedirectPageComponent } from './redirect-page/redirect-page.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -130,6 +132,7 @@ import { RedirectPageComponent } from './redirect-page/redirect-page.component';
     MatNativeDateModule,
     QRCodeModule,
     MatListModule,
+    FullCalendarModule
   ],
   providers: [
     DatePipe,

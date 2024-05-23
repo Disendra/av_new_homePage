@@ -1,5 +1,8 @@
 .counts {
   padding: 30px 0 60px;
+   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .counts .row {
@@ -9,13 +12,11 @@
 
 .counts .col-lg-3 {
   flex: 0 0 auto;
-  /* Each column takes up 25% of the container */
 }
 
 .counts .count-box {
   display: flex;
   flex-direction: column;
-  /* Stack the inner content vertically */
   align-items: center;
   justify-content: center;
   padding: 15px;
@@ -76,7 +77,8 @@
 }
 
 .custom-images {
-  max-height: 100px; /* Adjust as needed */
+  max-height: 100px;
+  /* Adjust as needed */
 }
 
 @media (min-width: 1275px) {

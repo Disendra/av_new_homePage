@@ -1,40 +1,40 @@
 import { formatDate } from '@angular/common'
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { A, an, dA } from '@fullcalendar/core/internal-common'
 
 @Injectable({
   providedIn: 'root'
 })
 export class FaServiceService {
-  //  url = 'https://av-nodejs.onrender.com';
-  // url = 'http://10.0.0.68:3000'
-  url = 'http://localhost:3000'
+   url = 'https://av-nodejs.onrender.com';
+  // url = 'http://localhost:3000'
+  // url = 'http://192.168.29.47:3000'
   macVendor = 'https://macvendorlookup.com/api/v2'
 
   constructor (private http: HttpClient) {}
-  
-  getSession() {
-    return this.http.get<any>(`${this.url}/getSession`);
-  }
-    
-  setSession(token: string,userName : string, emailId: any): void {
-    localStorage.setItem('jwtToken', token);
-    localStorage.setItem('userName', userName);
-    localStorage.setItem('emailId', emailId);
+
+  getSession () {
+    return this.http.get<any>(`${this.url}/getSession`)
   }
 
-  hasSession(): boolean {
-    const token = localStorage.getItem('jwtToken');
-    return !!token; 
+  setSession (token: string, userName: string, emailId: any): void {
+    localStorage.setItem('jwtToken', token)
+    localStorage.setItem('userName', userName)
+    localStorage.setItem('emailId', emailId)
   }
 
-  clearSession(): void {
-    localStorage.removeItem('jwtToken');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('emailId');
+  hasSession (): boolean {
+    const token = localStorage.getItem('jwtToken')
+    return !!token
   }
-  
-  
+
+  clearSession (): void {
+    localStorage.removeItem('jwtToken')
+    localStorage.removeItem('userName')
+    localStorage.removeItem('emailId')
+  }
+
   // logout() {
   //   return this.http.get<any>(`${this.url}/logout`);
   // }
@@ -55,12 +55,22 @@ export class FaServiceService {
     return this.http.post(`${this.url}/contactUs`, data)
   }
 
-  getUserDetails(offset: number, limit: number, searchTerm: string) {
-    return this.http.get(`${this.url}/getLoginData?page=${offset}&pageSize=${limit}&searchTerm=${searchTerm}`);
+  getUserDetails (offset: number, limit: number, searchTerm: string) {
+    return this.http.get(
+      `${this.url}/getLoginData?page=${offset}&pageSize=${limit}&searchTerm=${searchTerm}`
+    )
   }
 
   getFeedData () {
     return this.http.get(`${this.url}/getFeedData`)
+  }
+
+  getEvents () {
+    return this.http.get(`${this.url}/getEvents`)
+  }
+
+  postEvent (data: any) {
+    return this.http.post(`${this.url}/postEvent`, data)
   }
 
   getMacData (sysAdress: any) {
@@ -69,6 +79,10 @@ export class FaServiceService {
 
   insertFeedData (data: any) {
     return this.http.post(`${this.url}/insertFeed`, data)
+  }
+
+  insertEvent (data: any) {
+    return this.http.post(`${this.url}/insertEvent`, data)
   }
 
   getRoles () {

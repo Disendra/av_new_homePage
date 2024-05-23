@@ -18,13 +18,16 @@ const routes: Routes = [
   { path: 'home-page', redirectTo: '' },
   { path: 'contactUs', component: ContactComponent },
   { path: 'privacy-policy', component: GuidlinesComponent },
-  { path: 'cookie-policy', component: GuidlinesComponent }, 
+  { path: 'cookie-policy', component: GuidlinesComponent },
+  { path: 'accept-policy', component: GuidlinesComponent }, 
+  { path: 'platform-policy', component: GuidlinesComponent },
   { path: 'login-page/:value', component: LoginPageComponent },
   { path: 'redirected-page/:value', component: RedirectPageComponent },
-  { path: 'ekart-page', component: EkartComponent },
-  { path: 'av-community', component: CommunityPageComponent },
-  { path: 'avEngineer-dashboard', component: AvEnginnerComponent, canActivate: [AuthGuardService] },
-  { path: 'admin-page', component: AdminPageComponent, canActivate: [AuthGuardService] },
+  { path: 'ekart-page', component: EkartComponent,canActivate: [AuthGuardService] },
+  { path: 'av-community', component: CommunityPageComponent, canActivate: [AuthGuardService] },
+  // { path: 'avEngineer-dashboard', component: AvEnginnerComponent, canActivate: [AuthGuardService] },
+  { path: 'avEngineer-dashboard', component: AvEnginnerComponent, canActivate: [AuthGuardService]},
+  { path: 'admin-page', component: AdminPageComponent },
   { path: 'bussiness-card/:emailId', component: BussinessCardComponent }
 ]   
 

@@ -9,8 +9,8 @@ import { jsPDF } from 'jspdf'
 })
 export class AvSimulatorComponent {
   selectedImage: any
-  isQuetation: boolean = true
-  grandTotalWords: any
+  isQuetation: boolean = true;
+  grandTotalWords: any;
   toWordsInstance = new ToWords()
   @ViewChild('fileInput') fileInput!: ElementRef
   // Add an array to store your invoice items
@@ -19,6 +19,7 @@ export class AvSimulatorComponent {
       item: '',
       discription: '',
       make: '',
+      hsn : '',
       quantity: 0,
       unitCost: 0,
       total: 0,
@@ -51,39 +52,22 @@ export class AvSimulatorComponent {
 
   updateOverallTotal () {
     this.overallTotal = this.items.reduce(
-      (total, company) => total + (company.total || 0),
-      0
-    )
+      (total, company) => total + (company.total || 0),0)
   }
 
   updateOverallGST () {
     this.overallCGST = this.items.reduce(
-      (total, company) => total + (company.cgstAmount || 0),
-      0
-    )
+      (total, company) => total + (company.cgstAmount || 0),0)
     this.overallSGST = this.items.reduce(
-      (total, company) => total + (company.sgstAmount || 0),
-      0
-    )
+      (total, company) => total + (company.sgstAmount || 0),0)
   }
 
   updateTotal () {
     this.Total = this.items.reduce(
       (total, company) =>
-        total + (company.total + company.cgstAmount + company.sgstAmount || 0),
-      0
-    )
+        total + (company.total + company.cgstAmount + company.sgstAmount || 0),0)
     this.grandTotalWords = this.toWordsInstance.convert(this.Total)
   }
-
-  // companies = [
-  //   { name: 'Alfreds Futterkiste', contact: 'Maria Anders', country: 'Germany' },
-  //   { name: 'Centro comercial Moctezuma', contact: 'Francisco Chang', country: 'Mexico' },
-  //   { name: 'Ernst Handel', contact: 'Roland Mendel', country: 'Austria' },
-  //   { name: 'Island Trading', contact: 'Helen Bennett', country: 'UK' },
-  //   { name: 'Laughing Bacchus Winecellars', contact: 'Yoshi Tannamuri', country: 'Canada' },
-  //   { name: 'Magazzini Alimentari Riuniti', contact: 'Giovanni Rovelli', country: 'Italy' },
-  // ];
 
   addRow () {
     // Add a new item to the invoiceItems array
@@ -91,6 +75,7 @@ export class AvSimulatorComponent {
       item: '',
       discription: '',
       make: '',
+      hsn : '',
       quantity: 0,
       unitCost: 0,
       sgst: 0,
@@ -131,31 +116,55 @@ export class AvSimulatorComponent {
     }
   }
 
-  downloadCard () {
-    const element = document.getElementById('pdfContent')
-
+   downloadCard() {
+    const element = document.getElementById('pdfContent');
     if (element) {
-      html2canvas(element).then(canvas => {
-        const imgData = canvas.toDataURL('image/png')
-        const pdf = new jsPDF()
-
-        const imgWidth = 150
-        const imgHeight = (canvas.height * imgWidth) / canvas.width
-
-        // Calculate the center position of the page
-        const pageWidth = pdf.internal.pageSize.getWidth()
-        const pageHeight = pdf.internal.pageSize.getHeight()
-        const xPosition = (pageWidth - imgWidth) / 2
-        const yPosition = (pageHeight - imgHeight) / 2
-
-        // Add the image to the PDF at the center position
-        pdf.addImage(imgData, 'PNG', xPosition, yPosition, imgWidth, imgHeight)
-
-        // Save the PDF
-        pdf.save('Quatation.pdf')
-      })
+      const originalBoxShadow = element.style.boxShadow;
+      element.style.boxShadow = 'none';
+  
+      const options = {
+        ignoreElements: (el:any) => el.classList.contains('exclude'),
+      };
+  
+      html2canvas(element, options).then((canvas) => {
+        element.style.boxShadow = originalBoxShadow;
+  
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        const imgWidth = 200;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        const xPosition = (pageWidth - imgWidth) / 2;
+        let yPosition = 10; // Initial position
+  
+        // Adjust this value to move the image higher or lower
+        const imageYOffset = 0; // Move the image 5 units higher
+        yPosition += imageYOffset;
+  
+        const fontWeight = 'normal';
+  
+        pdf.setFont('helvetica', fontWeight);
+        pdf.setTextColor(0);
+        pdf.setFont('helvetica', 'normal');
+  
+        const borderOffset = 4;
+  
+        pdf.setDrawColor(0, 0, 0);
+        pdf.setLineWidth(0.5);
+        pdf.rect(
+          borderOffset,
+          borderOffset,
+          pageWidth - 2 * borderOffset,
+          pageHeight - 2 * borderOffset,
+          'S'
+        );
+        pdf.addImage(imgData, 'PNG', xPosition, yPosition, imgWidth, imgHeight);
+        pdf.save('Quotation.pdf');
+      });
     } else {
-      console.error("Element with id 'pdfContent' not found.")
+      console.error("Element with id 'pdfContent' not found.");
     }
   }
+  
 }

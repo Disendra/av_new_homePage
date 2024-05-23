@@ -499,9 +499,11 @@ textarea {
 
 .header-nav .profile .dropdown-header h6 {
   font-size: 18px;
-  margin-bottom: 0;
-  font-weight: 600;
-  color: #444444;
+    margin-top: 10px;
+    text-align: center;
+    /* margin-bottom: 0; */
+    font-weight: 500;
+    color: #444444;
 }
 
 .header-nav .profile .dropdown-header span {
@@ -524,6 +526,11 @@ textarea {
   background-color: #f6f9ff;
 }
 
+
+.btn-warning, .btn-success {
+  height: 30px;
+  margin-left: 10px;
+}
 
 /* Questions */
 

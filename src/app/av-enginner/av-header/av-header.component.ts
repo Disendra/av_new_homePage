@@ -1,8 +1,5 @@
 import { Component,ElementRef, OnInit,TemplateRef,ViewChild } from '@angular/core'
-import { MatDialog } from '@angular/material/dialog'
 import { Router } from '@angular/router'
-import { AuthGuardService } from 'src/app/services/auth-guard.service'
-import { AuthServiceService } from 'src/app/services/auth-service.service'
 import { FaServiceService } from 'src/app/services/fa-service.service'
 import { PopupService } from 'src/app/services/popup.service'
 import { UserServicesService } from 'src/app/services/user-services.service'
@@ -28,7 +25,7 @@ export class AvHeaderComponent implements OnInit {
   isKnowledgeBaseExpanded: boolean = false
   showSpinner: boolean = false
   isSimultor: boolean = false
-  isAbout: boolean = true
+  isAbout: boolean = false;
   isProfile: boolean = false
   isFeed: boolean = false
   products: any[] = []
@@ -46,19 +43,18 @@ export class AvHeaderComponent implements OnInit {
 
   constructor (
     private router: Router,
-    private dialog: MatDialog,
-    private authService: AuthServiceService,
     private popup: PopupService,
     private userService: UserServicesService,
     private faService: FaServiceService
   ) {
-    this.userName = localStorage.getItem('userName')
-    this.emailId = localStorage.getItem('emailId')
+
   }
 
   ngOnInit (): void {
+    this.userName = localStorage.getItem('userName')
+    this.emailId = localStorage.getItem('emailId')
     this.showSpinner = true
-    this.onClick('about')
+    this.onClick('feed');
     this.getProfile()
     this.userService
       .getProfileWeight(this.emailId)

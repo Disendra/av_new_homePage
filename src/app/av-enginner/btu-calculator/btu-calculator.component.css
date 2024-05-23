@@ -1,7 +1,6 @@
 table {
     font-family: Arial, sans-serif;
     border-collapse: collapse;
-    /* width: 65%; */
 }
 
 .container {
@@ -93,9 +92,7 @@ tr:nth-child(even) input {
 
 .cart1 {
     box-shadow: 4px 4px 10px #d1d9e6, -4px -4px 10px #f9f9f9;
-    /* background: #ffa50029; */
     margin-right: 8px;
-    /* height: 212px; */
     width: 20%;
 }
 
@@ -201,11 +198,41 @@ input {
     color: white;
 }
 
+full-calendar {
+    padding-top: 10px;
+}
+
+:host ::ng-deep .fc-prev-button, :host ::ng-deep .fc-next-button, :host ::ng-deep .fc-today-button {
+    background-color: #009879;
+}
+
+:host ::ng-deep .fc-button-group button {
+    background-color: #009879;
+}
+
+:host ::ng-deep .fc-button-group button.fc-button.fc-button-primary {
+    background-color: #009879;
+}
+
+.mat-buttons {
+    margin-top: -45px;
+}
+
+.btn-success {
+    background-color: green;
+    color: white;
+    border: none;
+}
+
+.mat_cancel_icon {
+    cursor: pointer;
+    margin-right: 15px;
+    color: red;
+}
 
 @media (max-width: 1200px) {
     .container {
         margin-left: 13%;
-        /* border: 1px solid; */
     }
 
     .card-Container {
@@ -218,7 +245,6 @@ input {
     .buttons {
         padding-left: 37%;
     }
-
 
     .cart1 {
         width: 19%;
@@ -234,8 +260,8 @@ input {
 
 @media only screen and (min-width: 1367px) {
     .card-Container {
-        width: 33%!important;
-}
+        width: 33% !important;
+    }
 }
 
 @media (min-width: 1201px) {

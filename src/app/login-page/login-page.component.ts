@@ -20,7 +20,9 @@ import { HttpClient } from '@angular/common/http'
 export class LoginPageComponent implements OnInit {
   receivedValue: any
   googleUrl: any
-  linkedInUrl: any
+  linkedInUrl: any;
+  baseUrl : string = 'https://av-nodejs.onrender.com';
+  // baseUrl : string = 'http://localhost:3000';
   constructor (
     private route: ActivatedRoute,
     private router: Router,
@@ -39,9 +41,11 @@ export class LoginPageComponent implements OnInit {
 
   onClick (type: any) {
     if (type === 'google') {
-      window.location.href = `http://localhost:3000/auth/google?destination=${this.receivedValue}`
+      window.location.href = `${this.baseUrl}/auth/google?destination=${this.receivedValue}`
     } else if (type === 'linkedIn') {
-      window.location.href = `http://localhost:3000/auth/linkedin?destination=${this.receivedValue}`
+      window.location.href = `${this.baseUrl}/auth/linkedin?destination=${this.receivedValue}`
+    } else if (type === 'facebook') {
+      window.location.href = `${this.baseUrl}/auth/facebook?destination=${this.receivedValue}`
     }
   }
 

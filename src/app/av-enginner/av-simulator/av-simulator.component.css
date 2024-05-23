@@ -4,24 +4,30 @@ table {
 	width: 100%;
   }
   
-h1 {
-	text-align: center;
-	color: orange;
-}
-
 .input-date {
 	margin-left: 63px;
 }
 
 .quotation {
 	height: 68px;
-    width: 220px 
+    width: 100%; 
 }
 
-.cart {
-width: 220px;
-background: #ffa50073;
+.input_length {
+	width: 65px;
+	border: 1px solid #ccc!important;
 }
+
+.bank_account {
+	width: 60%;
+}
+
+#pdfContent {
+	overflow: hidden;
+	height: auto;
+  }
+
+
 
   /* td, th {
 	border: 1px solid #dddddd;
@@ -30,16 +36,26 @@ background: #ffa50073;
   } */
 
   th {
-  background: orange;
-  border-color: #BBB;
+	background: #009879;
+    color: white;
+    padding: 5px;
+	font-size: 14px;
 }
   
-  .container {
-	padding-left: 15px;
-	padding-right: 15px;
-	margin-left: auto;
-	margin-right: auto;
-  }
+.container {
+    box-shadow: 4px 4px 10px #d1d9e6, -4px -4px 10px #f9f9f9;
+}
+
+.calculations {
+	line-height: 15px;
+}
+
+.bottom_box {
+  margin-top: -40px;
+  margin-bottom: -15px;
+  box-shadow: 4px 4px 10px #d1d9e6, -4px -4px 10px #f9f9f9; 
+  padding: 10px;
+}
   
   /* tr:nth-child(even) {
 	background-color: #dddddd;
@@ -54,20 +70,18 @@ background: #ffa50073;
 
 textarea {
 	height: 35px;
+	margin-top: 5px;
 	width: 102px;
 	border-color: #DDD;
 }
 
-.container {
-padding-top: 11px;
-border: 1px solid;
-/* box-shadow: 4px 4px 10px #d1d9e6, -4px -4px 10px #f9f9f9; */
-}
 
   @media only screen and (min-width: 768px) {
 	.container {
-	  width: 750px; /* You can adjust the width based on your design */
-	}
+        margin-left: 8%;
+        /* border: 1px solid; */
+        width: 88%;
+    }
 
 	.img-data {
 		padding-left: 32%;
@@ -81,7 +95,7 @@ border: 1px solid;
 	}
   
 	.img-data {
-	  padding-left: 35%;
+	  padding-left: 33%;
 	}
   
 	table {
@@ -113,12 +127,21 @@ border: 1px solid;
 
   @media only screen and (min-width: 1200px) {
 	.container {
-		margin-left: 26%;
-		margin-top: 15px;
-	}
+        margin-left: 25%;
+        /* border: 1px solid; */
+        width: 74%;
+    }
 
 	.img-data {
-	padding-left: 38%;
+	padding-left: 33%;
 	}
+
+	@media (max-width: 1200px) {
+		.container {
+			margin-left: 13%;
+			/* border: 1px solid; */
+		}
+	}	
+
   }
   

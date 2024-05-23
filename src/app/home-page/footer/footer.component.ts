@@ -11,7 +11,7 @@ export class FooterComponent {
 
   onClick(value : any) {
     this.router.navigate(['/guideLines', value])
-  }
+  }  
 
   socialLinks (type: any) {
     if (type === 'twitter') {
@@ -23,7 +23,7 @@ export class FooterComponent {
     } else if (type === 'linkedin') {
       window.open('https://www.linkedin.com/in/avchamps/', '_blank')
     } else {
-      window.open('https://youtube.com', '_blank')
+      window.open(' https://www.youtube.com/@AVChamps', '_blank')
     }
   }
 }

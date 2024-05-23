@@ -61,7 +61,8 @@ export class BussinessCardComponent implements OnInit {
         const decryptedString = this.decrypt(decodeURIComponent(encodedString));
         this.emailId = decryptedString;
       } else {
-        this.emailId = this.authSerice.getLoggedInEmail();
+        // this.emailId = this.authSerice.getLoggedInEmail();
+        this.emailId = localStorage.getItem('emailId');
       }
       this.getBussinessData();
     });
@@ -124,16 +125,16 @@ export class BussinessCardComponent implements OnInit {
         if (response && response.records && response.records.length > 0) {
           let records = response.records[0]
           if (
-            records.userName &&
-            records.userEmailId &&
+            records.fullName &&
+            records.emailId &&
             records.companyName &&
-            records.jobTitle &&
+            records.designation &&
             records.mobileNumber
           ) {
-            this.emailId = records.userEmailId
-            this.userName = records.userName
+            this.emailId = records.emailId
+            this.userName = records.fullName
             this.companyName = records.companyName
-            this.designation = records.jobTitle
+            this.designation = records.designation
             this.mobileNumber = records.mobileNumber
             this.qrCodeData()
           } else {
