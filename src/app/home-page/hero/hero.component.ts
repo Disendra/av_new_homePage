@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,8 +6,9 @@ import { Router } from '@angular/router';
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.css']
 })
-export class HeroComponent {
-  
+export class HeroComponent implements OnInit {
+  shuffledItems : any;
+
 constructor(private router : Router) { }
 
   onLogin () {
@@ -23,7 +24,7 @@ constructor(private router : Router) { }
     },
     {
       title: 'COMMUNITY',
-      title_content : 'Where Connections, Collaboration, and Communication Thrive',
+      title_content : 'Where Connections, Collaboration, and Create',
       description: 'Ascend your collaborative efforts with premier AV specialists. Share insights, stay updated on pioneering technologies, upcoming exhibitions, and training prospects. Amplify your collaboration with top-tier experts, enhancing your endeavors to unprecedented heights.',
       link: '#'
     },
@@ -34,4 +35,23 @@ constructor(private router : Router) { }
       link: '#'
     },
   ];
+
+  ngOnInit() {
+    this.shuffledItems = this.carouselItems.slice();
+    this.shuffleArray(this.shuffledItems);
+    console.log("Shuffled Array:", this.shuffledItems);
+  }
+  
+  shuffleArray(array: any[]) {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }  
+    return array;
+  }
+
 }

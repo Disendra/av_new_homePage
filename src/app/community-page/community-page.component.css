@@ -293,10 +293,10 @@ textarea {
   }
 }
 
-.logo img {
+/* .logo img {
   max-height: 26px;
   margin-right: 6px;
-}
+} */
 
 .logo span {
   font-size: 26px;
@@ -352,6 +352,10 @@ textarea {
 
 .header .search-form {
   width: 100%;
+}
+
+.search-bar {
+  margin-left: 15%;
 }
 
 .header .search-form input {
@@ -499,11 +503,11 @@ textarea {
 
 .header-nav .profile .dropdown-header h6 {
   font-size: 18px;
-    margin-top: 10px;
-    text-align: center;
-    /* margin-bottom: 0; */
-    font-weight: 500;
-    color: #444444;
+  margin-top: 10px;
+  text-align: center;
+  /* margin-bottom: 0; */
+  font-weight: 500;
+  color: #444444;
 }
 
 .header-nav .profile .dropdown-header span {
@@ -529,7 +533,13 @@ textarea {
 
 .btn-warning, .btn-success {
   height: 30px;
+  padding: 3px;
   margin-left: 10px;
+  color: white;
+}
+
+.mat-buttons {
+  margin-top: -35px;
 }
 
 /* Questions */
@@ -609,10 +619,6 @@ textarea {
   width: 500px;
 }
 
-.mat-buttons {
-  margin-top: -30px;
-}
-
 textarea {
   height: 100px;
 }
@@ -688,8 +694,19 @@ textarea {
   color: red;
 }
 
+.answer_text {
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+
 
 @media (max-width: 767.98px) {
+  .av_header_img {
+    display: none;
+  }
 
   .posted_Date {
     margin-top: -11%;
@@ -771,11 +788,11 @@ textarea {
 
 .text-ellipsis,
 .text-nowrap {
-  white-space: nowrap!important
+  white-space: nowrap !important
 }
 
 .table.table-profile>thead>tr>th {
-  border-bottom: none!important
+  border-bottom: none !important
 }
 
 .table.table-profile>thead>tr>th h4 {
@@ -812,7 +829,7 @@ textarea {
 }
 
 .table.table-profile>tbody>tr.divider>td {
-  padding: 0!important;
+  padding: 0 !important;
   height: 10px
 }
 
@@ -920,27 +937,34 @@ body.flat-black {
 }
 
 .bg-white {
-  background-color: #fff!important;
+  background-color: #fff !important;
 }
+
 .p-10 {
-  padding: 10px!important;
+  padding: 10px !important;
 }
+
 .media.media-xs .media-object {
   width: 32px;
 }
+
 .m-b-2 {
-  margin-bottom: 2px!important;
+  margin-bottom: 2px !important;
 }
+
 .media>.media-left, .media>.pull-left {
   padding-right: 15px;
 }
+
 .media-body, .media-left, .media-right {
   display: table-cell;
   vertical-align: top;
 }
+
 select.form-control:not([size]):not([multiple]) {
   height: 34px;
 }
+
 .form-control.input-inline {
   display: inline;
   width: auto;
@@ -1084,7 +1108,31 @@ select.form-control:not([size]):not([multiple]) {
 .timeline-content {
   letter-spacing: .25px;
   line-height: 18px;
-  font-size: 13px
+  font-size: 13px;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* CSS */
+.image-container {
+  width: 200px;
+  /* Set your desired width */
+  height: 200px;
+  /* Set your desired height */
+  overflow: hidden;
+  /* Hide any overflow */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
 }
 
 .timeline-content:after,
@@ -1178,7 +1226,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .text-danger, .text-red {
-  color: #ff5b57!important;
+  color: #ff5b57 !important;
 }
 
 .btn-primary {
@@ -1187,11 +1235,5 @@ select.form-control:not([size]):not([multiple]) {
 
 /* Add this CSS to your styles */
 .liked {
-  color: green!important;
+  color: green !important;
 }
-
-
-
-
-
-

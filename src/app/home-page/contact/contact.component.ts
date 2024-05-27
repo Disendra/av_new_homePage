@@ -28,7 +28,6 @@ export class ContactComponent implements OnInit {
   constructor (private faService: FaServiceService,  private popup: PopupService) {}
     
   ngOnInit(): void {
-      alert(this.header);
       if(this.header) {
         this.isHeader = false
       }

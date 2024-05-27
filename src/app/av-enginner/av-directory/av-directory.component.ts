@@ -20,7 +20,7 @@ export class AvDirectoryComponent implements OnInit {
   pagedUserData: any[] = []
   clickedUserData: any[] = []
   profileData: any[] = []
-  pageSize: number = 1
+  pageSize: number =10;
   companyName!: string
   profileImage: any[] = []
   showClickedData: boolean = false
@@ -59,10 +59,14 @@ export class AvDirectoryComponent implements OnInit {
 
   applyFilter() {
     this.pagedUserData = this.userData.filter(
-      item =>
-        item.fullName.toLowerCase().includes(this.filterTerm.toLowerCase()) 
-        // || item.designation.toLowerCase().includes(this.filterTerm.toLowerCase())
-    );  
+      item => {
+        const fullName = item.fullName || '';
+        const companyName = item.companyName || '';
+        return fullName.toLowerCase().includes(this.filterTerm.toLowerCase()) ||
+               companyName.toLowerCase().includes(this.filterTerm.toLowerCase());
+      }
+    );
+  
     if (this.pagedUserData.length > 0) {
       this.showFilters = true;
       if (this.paginator) {

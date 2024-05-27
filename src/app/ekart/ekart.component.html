@@ -6,16 +6,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-
  
   <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
       <a class="logo d-flex align-items-center" (click)="onSelect('products')">
-        <span class="d-block d-lg-block">AV Champs</span>
+        <a class="navbar-brand av_header" (click)="onBack()"><img  class="av_header_img" width="100" src="./assets/img/av_logo.png" alt="#" />AV CHAMPS</a>
       </a>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
+    <div class="search-bar" *ngIf="showSearchBox">
       <form class="search-form d-flex align-items-center">
         <input type="text" name="searchText" [(ngModel)]="searchText" (keyup.enter)="onSearch()" placeholder="Search" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
@@ -23,22 +22,22 @@
     </div><!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
+      <ul class="d-flex align-items-center mt-2">
 
-        <li class="nav-item d-block d-lg-none">
+        <!-- <li class="nav-item d-block d-lg-none" *ngIf="showSearchBox">
           <a class="nav-link nav-icon search-bar-toggle" (click)="toggleSearch()">
             <i class="bi bi-search"></i>
           </a>
-        </li>
+        </li> -->
         
-        <div *ngIf="showSearch" class="search-box">
-          <form class="search-form d-flex align-items-center">
+        <div class="search-box">
+          <form class="search-form d-flex align-items-center d-md-none">
             <input type="text" name="searchText" [(ngModel)]="searchText" placeholder="Search" title="Enter search keyword">
             <button type="submit" title="Search"><i class="bi bi-search"></i></button>
           </form>
         </div>
 
-        <li class="nav-item dropdown cart_Icon">
+        <li class="nav-item dropdown cart_Icon" *ngIf="showSearchBox">
           <a class="nav-link nav-icon" (click)="onCart('insertProduct')" data-bs-toggle="dropdown">
             <i class="bi bi-cart"></i>
             <span class="post_ad">Post Ad</span>
@@ -171,7 +170,7 @@
   </div>
 </section>
 
-<div class="row justify-content-center align-items-center" *ngIf="filteredProducts.length === 0 || empty_produts" style="height: 70vh;">
+<div class="row justify-content-center align-items-center" *ngIf="filteredProducts.length === 0 && empty_produts" style="height: 70vh;">
   <div class="col-sm-6 col-lg-3 text-center">
     <img src="assets/img/ekart/empty_produts.png" class="img-fluid" alt="No products">
   </div>
@@ -189,43 +188,42 @@
       </div>
       <div class="form-group mb-0">
         <label>Description</label><label class="red-asterisk">*</label>
-        <textarea type="text" maxlength="400" class="form-control" [(ngModel)]="description" name="description"></textarea>
+        <textarea maxlength="400" class="form-control" [(ngModel)]="description" name="description"></textarea>
       </div>
       <div class="form-group mb-0">
         <label>Location</label><label class="red-asterisk">*</label>
-        <input type="text" maxlength="50" class="form-control"  (input)="validateInput($event)" [(ngModel)]="location" name="location">
+        <input type="text" maxlength="50" class="form-control" (input)="validateInput($event)" [(ngModel)]="location" name="location">
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-12">
           <div class="form-group mb-0">
             <label for="mobile">Mobile</label><label class="red-asterisk">*</label>
             <input type="number" onKeyPress="if(this.value.length==10) return false;" class="form-control" [(ngModel)]="mobileNumber" name="mobileNumber">
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-12">
           <div class="form-group mb-0">
             <label for="price">Price</label><label class="red-asterisk">*</label>
             <input type="number" onKeyPress="if(this.value.length==8) return false;" class="form-control" [(ngModel)]="price" name="price">
           </div>
         </div>
       </div>
-      
       <div class="form-group mb-0">
         <label>Image</label><label class="red-asterisk">*</label>
         <div id="drop-area" class="drop-area" (click)="selectFile()">
-            <input type="file" accept="image/*" id="fileInput" class="file-input" (change)="onFileSelected($event)">
-            <p>Click here or drag & drop files</p>
-        </div> 
-    </div>
-    <p class="file_name">{{ selectedFileName }}</p>
-    
+          <input type="file" accept="image/*" id="fileInput" class="file-input" (change)="onFileSelected($event)">
+          <p>Click here or drag & drop files</p>
+        </div>
+        <p class="file_name">{{ selectedFileName }}</p>
+      </div>
     </div>
   </mat-dialog-content>
   <mat-dialog-actions align="end" class="mat-buttons">
     <button mat-dialog-close class="btn btn-warning">Cancel</button>
-    <button [mat-dialog-close]="true" class="btn btn-success button_left" [disabled]="!this.emailId || !this.title || !this.description || !this.location ||  !this.price || !this.showFile"  (click)="onUpload()">{{sellerButton}}</button>
+    <button [mat-dialog-close]="true" class="btn btn-success button_left" [disabled]="!this.emailId || !this.title || !this.description || !this.location || !this.price || !this.showFile" (click)="onUpload()">{{sellerButton}}</button>
   </mat-dialog-actions>
 </ng-template>
+
 
 
 <ng-template #contact>

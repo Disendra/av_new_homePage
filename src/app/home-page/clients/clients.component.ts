@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { an } from '@fullcalendar/core/internal-common';
 
 @Component({
   selector: 'app-clients',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./clients.component.css']
 })
 export class ClientsComponent {
-
+  shuffledItems : any;
 
   images = [ 
     'assets/img/clients/zoapi_img.png',
@@ -18,6 +19,25 @@ export class ClientsComponent {
     // 'assets/img/clients/letsving.png',
     'assets/img/clients/babbler_img.png'
   ];
+
+
+  ngOnInit() {
+    this.shuffledItems = this.images.slice();
+    this.shuffleArray(this.shuffledItems);
+    console.log("Shuffled Array:", this.shuffledItems);
+  }
+  
+  shuffleArray(array: any[]) {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }  
+    return array;
+  }
 
 
 }

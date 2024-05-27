@@ -592,10 +592,10 @@ textarea {
   }
 }
 
-.logo img {
+/* .logo img {
   max-height: 26px;
   margin-right: 6px;
-}
+} */
 
 .logo span {
   font-size: 26px;
@@ -700,9 +700,34 @@ textarea {
     display: none;
   }
 
+  .rounded-circle {
+    width: 70px;
+  }
+
+  label {
+    margin-top: 2px;
+    margin-bottom: 0px;
+  }
+
+  .av_header {
+    font-size: 18px !important;
+  }
+
+  .av_header_img {
+    display: none;
+  }
+
+  .mat-buttons {
+    margin-top: -15px;
+  }
+
   .cart_Icon {
-    margin-left: 10px;
-    margin-right: 10px;
+    /* margin-left: 10px; */
+    margin-right: -20px;
+  }
+
+  .drop-area {
+    height: 55px;
   }
 
 }

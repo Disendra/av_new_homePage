@@ -251,12 +251,16 @@ footer {
 .widget_menu ul li a {
     color: black !important;
     text-decoration: none;
+    font-size: 12px;
 }
 
 .widget_menu ul li a:hover {
     color: blue !important;
 }
 
+.information_f {
+    font-size: 12px;
+}
 
 .social-links {
     display: flex;

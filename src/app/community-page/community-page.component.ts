@@ -8,6 +8,7 @@ import { CommunityService } from '../services/community.service'
 import { AuthGuardService } from '../services/auth-guard.service'
 import { FaServiceService } from '../services/fa-service.service'
 import { DatePipe } from '@angular/common'
+import { A, an } from '@fullcalendar/core/internal-common'
 
 @Component({
   selector: 'app-community-page',
@@ -39,8 +40,10 @@ export class CommunityPageComponent {
   isHeader : boolean = true;
   showContactForm: boolean = false
   additionalAnswersVisible: boolean = false;
-  showHomepage: boolean = true
-  showMyposts: boolean = false
+  showHomepage: boolean = false;
+  showMyposts: boolean = false;
+  showFullQuestion : boolean = false;
+  showSearchBox : boolean = true;
   updateQid: any
   buttonType: string = 'Save'
   showSpinner: boolean = false
@@ -49,6 +52,7 @@ export class CommunityPageComponent {
   additionalAnswersVisibility: { [key: string]: boolean } = {}
   additionalAnswersData: { [key: string]: any[] } = {}
   showFullContent : { [key: string]: boolean } = {}
+  questionStates: {[key: string]: boolean} = {};
 
   constructor (
     private popup: PopupService,
@@ -62,35 +66,38 @@ export class CommunityPageComponent {
   ) {}
 
   ngOnInit (): void {
-    // this.emailId = localStorage.getItem('emailId');
-    // this.userName = localStorage.getItem('userName');
-    this.emailId = 'gdisendra@gmail.com';
-    this.userName = 'Disendra';
+    this.emailId = localStorage.getItem('emailId');
+    this.userName = localStorage.getItem('userName');
+    // this.emailId = 'gdisendra@gmail.com';
+    // this.userName = 'Disendra';
     this.getProfileImage()
-    this.onSelect('homePage')
+    this.onSelect('homePage');
   }
 
 
-  onSelect (option: any): void {
+  onSelect(option: any): void {
+    this.showHomepage = false;
+    this.showMyposts = false;
+    this.showContactForm = false;
     this.pageType = option;
-    this.currentPage = 1
-    this.pageSize = 5
+    this.currentPage = 1;
+    this.pageSize = 5;
     if (option === 'homePage') {
-      this.mainQuestions = []
-      this.showHomepage = true;
-      this.showMyposts = false;
-      this.getQuestions();
-      this.getLikesInfo();
+        this.mainQuestions = [];
+        this.showHomepage = true;
+        this.getQuestions();
+        this.getLikesInfo();
     } else if (option === 'contact') {
-      this.showContactForm = true
+        this.showSearchBox = false;
+        this.showContactForm = true;        
     } else if (option === 'myPosts') {
-      this.mainQuestions = []
-      this.getUploadedQuestions()
-      this.showMyposts = true
+        this.mainQuestions = [];
+        this.getUploadedQuestions();
+        this.showMyposts = true;
     } else {
-      this.logOut()
+        this.logOut();
     }
-  }
+}
 
   //Image
   getProfileImage () {
@@ -118,10 +125,8 @@ export class CommunityPageComponent {
     this.pageSize = 5
     this.mainQuestions = [];
     if(this.pageType === 'homePage') {
-      alert('homePage');
     this.getQuestions();
     } else if (this.pageType === 'myPosts') {
-     alert('myPosts');
      this.getUploadedQuestions();
     }
   }
@@ -185,8 +190,10 @@ loadMore () {
     formData.append('emailId', this.emailId)
     formData.append('question', this.userQuestion)
     formData.append('image', this.selectedFile)
-    formData.append('urlLink', this.questionURl)
     formData.append('qId', this.updateQid)
+    if (this.questionURl) {
+      formData.append('urlLink', this.questionURl)
+    }
 
     this.commintyService
       .updateCommunity(formData)
@@ -210,7 +217,7 @@ loadMore () {
   onFileSelected (event: any) {
     const file = event.target.files[0]
     console.log('Selected file:', file)
-    this.selectedFile = file
+    this.selectedFile = file;
   }
 
   // Upload
@@ -242,11 +249,11 @@ loadMore () {
     }
   }
 
-  uploadAnswer (qId:any) {
+  uploadAnswer (qId:any,replyAnswer :any) {
     this.showSpinner = true
     const formData = new FormData()
     formData.append('emailId', this.emailId)
-    formData.append('answer', this.replyAnswer)
+    formData.append('answer', replyAnswer)
     formData.append('userName', this.userName)
     formData.append('qId', qId)
     this.commintyService
@@ -281,7 +288,6 @@ loadMore () {
         this.showSpinner = false;
     }
 }
-
 
   showContent(question: any) {
     this.commintyService.getFeedback(question.qId)
@@ -319,12 +325,12 @@ loadMore () {
   }
 
   //Expand
-  expandQuestion (qId: number): void {
-    this.expandedQuestion = this.expandedQuestion === qId ? null : qId
-  }
+  toggleShowFullQuestion(item:any) {
+    this.questionStates[item.qId] = !this.questionStates[item.qId];
+  }  
 
-  isExpanded (qId: number): boolean {
-    return this.expandedQuestion === qId && this.expandedQuestion !== null
+  isQuestionOpen(item: any) {
+    return this.questionStates[item.qId];
   }
 
   urlExpand () {
@@ -342,7 +348,7 @@ loadMore () {
     console.log('question', question)
     this.userQuestion = question.question
     this.questionURl = question.urlLink
-    this.updateQid = question.qId
+    this.updateQid = question.qId;
     this.popup.openDialogWithTemplateRef(this.myDialog)
   }
 
@@ -431,8 +437,7 @@ private handleError(error: any) {
   }
 
   onBack () {
-    this.onSelect('homePage')
-    window.scrollTo(0, 0)
+   window.location.reload();
   }
 
   formatDOB (dob: any) {

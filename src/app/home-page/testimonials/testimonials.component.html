@@ -9,7 +9,7 @@
    <!-- carousel.component.html -->
 <div id="carouselExample3Controls" class="carousel slide" data-ride="carousel">
    <div class="carousel-inner">
-     <div class="carousel-item" *ngFor="let item of carouselItems; let i = index" [class.active]="i === 0">
+     <div class="carousel-item" *ngFor="let item of shuffledItems; let i = index" [class.active]="i === 0">
        <div class="box col-lg-10 mx-auto">
          <div class="img_container">
            <div class="img-box">

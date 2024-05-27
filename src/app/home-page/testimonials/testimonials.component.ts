@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./testimonials.component.css']
 })
 export class TestimonialsComponent {
+  shuffledItems : any;
+
   carouselItems = [
     {
       name: 'Harish N',
@@ -20,4 +22,23 @@ export class TestimonialsComponent {
       imageUrl: '/assets/img/testimonials/vishnu.jpeg'
     },
   ];
+
+  ngOnInit() {
+    this.shuffledItems = this.carouselItems.slice();
+    this.shuffleArray(this.shuffledItems);
+    console.log("Shuffled Array:", this.shuffledItems);
+  }
+  
+  shuffleArray(array: any[]) {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }  
+    return array;
+  }
+
 }

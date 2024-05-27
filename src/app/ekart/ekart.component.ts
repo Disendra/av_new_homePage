@@ -35,9 +35,12 @@ export class EkartComponent implements OnInit {
   showCart: boolean = false
   empty_produts: boolean = false
   showProducts: boolean = true
-  showSearch: boolean = false
+  showSearch: boolean = false;
+  showSearchBox : boolean = true;
   showContactForm: boolean = false
-  showViewMOre: boolean = true
+  showViewMOre: boolean = true;
+  viewMoreButton : boolean = false;
+  showEmptyImg : boolean = false;
   selectedItem: any
   offset: number = 0
   searchText: string = ''
@@ -72,9 +75,9 @@ export class EkartComponent implements OnInit {
     this.getUploadProducts(this.offset)
   }
 
-  toggleSearch () {
-    this.showSearch = !this.showSearch
-  }
+  // toggleSearch () {
+  //   this.showSearch = !this.showSearch
+  // }
 
   onSelect (option: any): void {
     if (option === 'myPosts') {
@@ -85,9 +88,10 @@ export class EkartComponent implements OnInit {
     } else if (option === 'products') {
       window.location.reload()
     } else if (option === 'contact') {
-      this.showContactForm = true
-      this.showCart = false
-      this.showProducts = false
+      this.showSearchBox = false;
+      this.showContactForm = true;
+      this.showCart = false;
+      this.showProducts = false;
     } else {
       this.logOut()
     }
@@ -97,11 +101,9 @@ export class EkartComponent implements OnInit {
     this.showSpinner = true
     this.userService.getUploadData(this.emailId, offset).subscribe(response => {
       console.log(response)
+      this.getRecords(response);
       this.uploadProducts = this.uploadProducts.concat(response.records)
       this.showSpinner = false
-      if (response.records.length === 0) {
-        this.empty_produts = true
-      }
     })
   }
 
@@ -111,7 +113,8 @@ export class EkartComponent implements OnInit {
       .getCartData(offset, this.searchText)
       .subscribe((response: any) => {
         this.products = this.products.concat(response.records)
-        console.log(response)
+        console.log(response);
+        this.getRecords(response);
         this.showSpinner = false
       })
   }
@@ -212,8 +215,9 @@ export class EkartComponent implements OnInit {
         this.userService.refreshData()
         this.showSpinner = false
         alert(response.message)
-        // this.getUploadProducts(this.offset);
+        this.getUploadProducts(this.offset);
         window.location.reload()
+      //  this.onSelect('myPosts');
       } else {
         alert('An error occurred. Please try again later.')
       }
@@ -235,8 +239,9 @@ export class EkartComponent implements OnInit {
         }
         this.userService.soldOut(soldOutData).subscribe((response: any) => {
           this.userService.refreshData()
-          alert(response.message)
-          this.getUploadProducts(this.offset)
+          alert(response.message);
+          window.location.reload();
+          // this.getUploadProducts(this.offset)
         })
       }
     }
@@ -272,7 +277,8 @@ export class EkartComponent implements OnInit {
       if (response && response.status) {
         this.userService.refreshData()
         alert(response.message)
-        this.getUploadProducts(this.offset)
+        this.getUploadProducts(this.offset);
+        window.location.reload();
       } else {
         alert('An error occurred. Please try again later.')
       }
@@ -316,6 +322,17 @@ export class EkartComponent implements OnInit {
     return mobileStr.length === 10 && !repeatedPattern.test(mobileStr)
   }
 
+  getRecords(response:any) {
+    this.viewMoreButton = false;
+    this.showEmptyImg = false;
+    if(response.records.length === 5) {
+         this.viewMoreButton = true;
+    } else if(response.records.length === 0) {
+      this.showEmptyImg = true;
+    }
+  }
+
+
   clearInputs () {
     ;(this.title = ''),
       (this.description = ''),
@@ -324,6 +341,11 @@ export class EkartComponent implements OnInit {
       (this.location = ''),
       (this.selectedFileName = '')
   }
+
+onBack() {
+  window.location.reload();
+}
+
 
   logOut () {
     this.faService.clearSession()

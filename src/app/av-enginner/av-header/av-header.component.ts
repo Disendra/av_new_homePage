@@ -255,7 +255,12 @@ export class AvHeaderComponent implements OnInit {
     this.getProfile()
   }
 
+  closePopup() {
+   this.popup.closeDialog();
+  }
+
   logOut () {
+    this.closePopup();
     this.faService.clearSession()
     this.router.navigate(['/home-page'])
   }

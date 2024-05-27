@@ -38,7 +38,7 @@
         </div>
       </div>
 
-      <nav id="navbar" class="nav-menu navbar">
+      <nav id="navbar" class="nav-menu navbar" (click)="closePopup()">
         <ul>
           <li><a class="nav-link scrollto" (click)="onClick('about')" [class.active]="activeMenuItem === 'about'"><i class="bi bi-person"></i> <span>About</span></a></li>
           <li><a class="nav-link scrollto" (click)="onClick('feed')" [class.active]="activeMenuItem === 'feed'"><i class="bi bi-envelope"></i> <span>Feed</span></a></li>

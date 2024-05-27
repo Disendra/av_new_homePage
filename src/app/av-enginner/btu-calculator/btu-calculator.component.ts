@@ -197,9 +197,11 @@ export class BtuCalculatorComponent implements OnInit {
     this.popup.openDialogWithTemplateRef(this.myDialog)
   }
 
-  handleEventClick (info: EventClickArg) {
+  handleEventClick(info: EventClickArg): void {
     if (info.event.url) {
-      window.open(info.event.url, '_blank')
+      window.open(info.event.url, '_blank');
+      info.jsEvent.preventDefault();
+      return;
     }
   }
 
