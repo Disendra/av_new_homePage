@@ -695,6 +695,11 @@ textarea {
   margin-left: 13%;
 }
 
+.cancel_Icon {
+  margin-left: 90%;
+  margin-top: -20px;
+}
+
 @media (max-width: 767px) {
   .post_ad {
     display: none;

@@ -75,7 +75,7 @@
 			<td><textarea  [(ngModel)]="company.hsn"></textarea></td>
 			<td><input type="number" class="input_length" [(ngModel)]="company.quantity" (ngModelChange)="calculateAmount(company)"></td>
 			<td><input type="number" class="input_length" [(ngModel)]="company.unitCost" (ngModelChange)="calculateAmount(company)"></td>
-			<td><input type="number" class="input_length" [(ngModel)]="company.total"></td>
+			<td><input type="number" class="input_length" [(ngModel)]="company.total" disabled></td>
 			<td><input type="number" class="input_length" [(ngModel)]="company.cgst" (ngModelChange)="calculateGST(company)"></td>
 			<td><input type="number" class="input_length" [(ngModel)]="company.sgst" (ngModelChange)="calculateGST(company)"></td>
 		  </tr>
@@ -91,10 +91,10 @@
 		</div>
 	  
 		<div class="calculations">
-		  <p>Sub Total: {{overallTotal}}</p>
-		  <p>Sub Total (CGST): {{overallCGST}}</p>
-		  <p>Sub Total (SGST): {{overallSGST}}</p>
-		  <p>Grand Total: {{Total}}</p>
+		  <p>Sub Total: {{overallTotal | number:'1.2-2'}}</p>
+		  <p>Sub Total (CGST): {{overallCGST | number:'1.2-2'}}</p>
+		  <p>Sub Total (SGST): {{overallSGST | number:'1.2-2'}}</p>
+		  <p>Grand Total: {{Total | number:'1.2-2'}}</p>
 		</div>
 	  
 		<br><br>

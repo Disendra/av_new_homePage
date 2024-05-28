@@ -19,12 +19,13 @@ export class AdminPageComponent implements OnInit {
   link: any
   chart: any
   totalCount: any
-  startDate!: any
+  startDate!: any;
+  eventEndDate : any;
   dltFeedDate!: any
   selectedRating: any = 'All'
   endDate!: Date | null
   showSpinner: boolean = false
-  showAdminpanel: boolean = false
+  showAdminpanel: boolean = false;
   selectedOptions: any
   @ViewChild('myDialog') myDialog!: TemplateRef<any>
 
@@ -78,7 +79,8 @@ export class AdminPageComponent implements OnInit {
       event_name: this.eventName,
       event_date: this.startDate,
       website_Url: this.eventUrl,
-      dltFeedDate: this.dltFeedDate
+      dltFeedDate: this.dltFeedDate,
+      eventEndDate : this.eventEndDate
     }
     this.faService.insertEvent(data).subscribe((response: any) => {
       console.log('Form submitted:', response)

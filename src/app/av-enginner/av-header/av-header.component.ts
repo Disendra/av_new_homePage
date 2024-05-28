@@ -53,6 +53,8 @@ export class AvHeaderComponent implements OnInit {
   ngOnInit (): void {
     this.userName = localStorage.getItem('userName')
     this.emailId = localStorage.getItem('emailId')
+    // this.userName = 'Disendra';
+    // this.emailId = 'disendra889@gmail.com';
     this.showSpinner = true
     this.onClick('feed');
     this.getProfile()
@@ -174,18 +176,18 @@ export class AvHeaderComponent implements OnInit {
     switch (this.CickedsocialMedia) {
       case 'twitter':
         urlRegex =
-          /^(https?:\/\/)?(www\.)?twitter\.com\/[a-zA-Z0-9_]{1,15}(\/\w+)*\/?$/
+        /^(https?:\/\/)?(www\.)?x\.com\/[a-zA-Z0-9_]{1,15}(\/\w+)*\/?$/
         break
       case 'facebook':
-        urlRegex = /^(https?:\/\/)?(www\.)?facebook\.com\/[^/]+$/
+        urlRegex = /^(https?:\/\/)?(www\.)?facebook\.com\/(?:[^/]+|pages\/\w+)$/
         break
       case 'instagram':
         urlRegex =
-          /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9_\-]+(\/\w+)*\/?$/
+        /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9_.\-]+(\/\w+)*\/?$/
         break
       case 'linkedin':
         urlRegex =
-          /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[a-zA-Z0-9\-]+(\/\w+)*\/?$/
+        /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[a-zA-Z0-9\-_.]+(\/\w+)*\/?$/
         break
       default:
         alert('Invalid social media platform')

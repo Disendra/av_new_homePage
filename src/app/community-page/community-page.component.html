@@ -216,10 +216,11 @@
                           <div class="input-group">
                             <input type="text" class="form-control rounded-corner" name="replyAnswer" [(ngModel)]="item.replyAnswer" placeholder="Share your Answer here...">
                             <div class="input-group-append p-l-10">
-                              <button class="btn btn-primary f-s-12 rounded-corner" [disabled]="!item.replyAnswer" (click)="uploadAnswer(item.qId,item.replyAnswer)" type="button">
-                                <i class="material-icons">send</i>
+                              <button class="btn btn-primary f-s-12 rounded-corner send_button" [disabled]="!item.replyAnswer" (click)="uploadAnswer(item.qId,item.replyAnswer)" type="button">
+                                  <i class="material-icons">send</i>
                               </button>
-                            </div>
+                          </div>
+                          
                         </div>
                         
                           </form>
@@ -259,7 +260,7 @@
       
       <mat-dialog-actions align="end" class="mat-buttons">
         <button mat-dialog-close class="btn btn-warning">Cancel</button>
-        <button [mat-dialog-close]="true" class="btn btn-success button_left" (click)="onUpload()">{{ buttonType }}</button>
+        <button [mat-dialog-close]="true" class="btn btn-success button_left" [disabled]="!userQuestion" (click)="onUpload()">{{ buttonType }}</button>
       </mat-dialog-actions>
     </ng-template>
 

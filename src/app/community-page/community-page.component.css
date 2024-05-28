@@ -328,6 +328,14 @@ textarea {
   padding: 0 20px;
 }
 
+.send_button {
+  display: flex;
+  align-items: center;
+  background: #0000ff78;
+  padding: 7px;
+  border: none;
+}
+
 @media (max-width: 1199px) {
   .header .search-bar {
     position: fixed;

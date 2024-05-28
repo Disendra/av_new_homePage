@@ -56,18 +56,31 @@
                 <label for="title" class="mb-0">Event URL:</label>
                 <input type="text" class="form-control" id="title" name="title" required [(ngModel)]="eventUrl">
               </div>
-              <div class="form-group">
-                <label for="title" class="mb-0">Started Date:</label>
-                <input type="date" class="form-control" id="title" name="title" required [(ngModel)]="startDate">
+
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <div class="form-group">
+                    <label for="startDate" class="mb-0">Start Date:</label>
+                    <input type="date" class="form-control" id="startDate" name="startDate" required [(ngModel)]="startDate">
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="form-group">
+                    <label for="endDate" class="mb-0">End Date:</label>
+                    <input type="date" class="form-control" id="endDate" name="endDate" required [(ngModel)]="eventEndDate">
+                  </div>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="title" class="mb-0">End Date:</label>
+              
+
+            <div class="form-group">
+                <label for="title" class="mb-0">Expiry Date:</label>
                 <input type="date" class="form-control" id="title" name="title" required [(ngModel)]="dltFeedDate">
               </div>
                            
               <div class="text-right">
               <button type="submit" (click)="onClear()" class="btn btn-primary">Cancel</button>          
-              <button type="submit" (click)="postEvent()" [disabled]="!eventName || !eventUrl || !startDate || !dltFeedDate" class="btn btn-success ml-2">Save</button>
+              <button type="submit" (click)="postEvent()" [disabled]="!eventName || !eventUrl || !startDate || !eventEndDate || !dltFeedDate" class="btn btn-success ml-2">Save</button>
               </div><br>
             </form>
           </div>

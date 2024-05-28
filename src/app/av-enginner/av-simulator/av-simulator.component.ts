@@ -91,6 +91,10 @@ export class AvSimulatorComponent {
     if (this.items.length > 1) {
       this.items.pop()
     }
+    this.updateTotal();
+    this.updateOverallTotal();
+    this.updateOverallGST();
+
   }
 
   imgData: string | null = null
