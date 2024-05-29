@@ -1,8 +1,6 @@
 import { Component, TemplateRef, ViewChild, AfterViewInit, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material/dialog'
 import { UserServicesService } from '../services/user-services.service'
-import { AuthServiceService } from '../services/auth-service.service'
-import { HttpClient } from '@angular/common/http'
+import { PopupService } from '../services/popup.service'
 
 @Component({
   selector: 'app-feedback-page',
@@ -14,42 +12,30 @@ export class FeedbackPageComponent implements OnInit {
   emailId: any
   message: any
   rating: any;
+  userName : any;
   isDialogOpen: boolean = false;
   error : boolean = false;
   @ViewChild('firstDialog') firstDialog!: TemplateRef<any>
+ 
 
   constructor (
-    private dialog: MatDialog,
-    public userService: UserServicesService,
-    private authService: AuthServiceService,
-    private http: HttpClient
+    public popUp : PopupService,
+    public userService: UserServicesService
   ) {
-    this.emailId = this.authService.getLoggedInEmail()
+  
   }
-
   ngOnInit(): void {
-    if (!this.isDialogOpen) { // Check if dialog is already open
+    this.emailId = localStorage.getItem('emailId');
+    this.userName = localStorage.getItem('userName');
+    const dialogOpened = localStorage.getItem('dialogOpened');
+    if (!dialogOpened) {
       setTimeout(() => {
-        this.openDialogWithTemplateRef(this.firstDialog);
+        this.popUp.openDialogWithTemplateRef(this.firstDialog);
+        localStorage.setItem('dialogOpened', 'true');
       }, 30000);
     }
   }
   
-  openDialogWithTemplateRef(templateRef: TemplateRef<any>) {
-    if (!this.isDialogOpen) {
-      this.dialogRef = this.dialog.open(templateRef, {
-        disableClose: true
-      });
-      this.dialogRef.afterClosed().subscribe(() => {
-        this.isDialogOpen = false; // Update flag when dialog is closed
-      });
-      this.isDialogOpen = true; // Update flag when dialog is opened
-    }
-  }
-  
-   
-  
-
   displaySelectedRating (rating: any) {
     this.rating = rating
   }
@@ -59,17 +45,18 @@ export class FeedbackPageComponent implements OnInit {
     const feedbackData = {
       rating: this.rating,
       emailId: this.emailId,
-      message: this.message
+      message: this.message,
+      userName : this.userName
     }
     this.userService.insertFeedback(feedbackData).subscribe(
       (response: any) => {
-        console.log(response)
+        console.log(response);
+        this.popUp.closeDialog();
       },
       (error: any) => {
         console.error(error)
       }
     )
-    this.dialogRef.close()
     }
     else {
       this.error = true;

@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'ekart-page', component: EkartComponent,canActivate: [AuthGuardService] },
   { path: 'av-community', component: CommunityPageComponent,canActivate: [AuthGuardService] },
   // { path: 'avEngineer-dashboard', component: AvEnginnerComponent, canActivate: [AuthGuardService] },
-  { path: 'avEngineer-dashboard', component: AvEnginnerComponent, canActivate: [AuthGuardService]},
+  { path: 'avEngineer-dashboard', component: AvEnginnerComponent},
   { path: 'admin-page', component: AdminPageComponent },
   { path: 'bussiness-card/:emailId', component: BussinessCardComponent }
 ]   

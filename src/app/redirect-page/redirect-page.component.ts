@@ -27,9 +27,14 @@ export class RedirectPageComponent implements OnInit {
 
   setSession () {
     this.faService.getSession().subscribe(response => {
-      const token = response.session[0].jwtToken
-      const userName = response.session[0].firstName;
-      const emailId = response.session[0].emailId
+      // const token = response.session[0].jwtToken
+      // const userName = response.session[0].firstName;
+      // const emailId = response.session[0].emailId
+      const token = 'sddffdsfdsf';
+      const userName = 'Disendra';
+      const emailId = 'disendra889@gmail.com'
+
+
       this.faService.setSession(token,userName,emailId);
       this.redirectedPath()
     })

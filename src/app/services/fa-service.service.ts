@@ -30,9 +30,10 @@ export class FaServiceService {
   }
 
   clearSession (): void {
-    localStorage.removeItem('jwtToken')
-    localStorage.removeItem('userName')
-    localStorage.removeItem('emailId')
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('emailId');
+    localStorage.removeItem('dialogOpened');
   }
 
   // logout() {

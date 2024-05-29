@@ -1,144 +1,167 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+  display: grid;
+  height: 100%;
+  place-items: center;
+  text-align: center;
+  background: #f6f5f7;
 }
 
 .container {
-  background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/concrete-texture.png");
+  position: relative;
+  width: 400px;
+  background: #FFF;
+  padding: 20px 30px;
+  box-shadow: 25px 30px 55px #5557;
+  border-radius: 13px;
   display: flex;
-  flex-wrap: wrap;
-  /* height: 100vh; */
   align-items: center;
   justify-content: center;
-  padding: 0 20px;
+  flex-direction: column;
 }
 
-.rating {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  overflow: hidden;
-  flex-direction: row-reverse;
-  height: 134px;
-  margin-bottom: 8px;
-  position: relative;
+.container .post {
+  display: none;
+
 }
 
-.rating-0 {
-  filter: grayscale(100%);
+.container .text {
+  font-size: 25px;
+  color: #666;
+  font-weight: 500;
 }
 
-.rating>input {
+.container .edit {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 16px;
+  color: #666;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.cancel_Icon {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.container .edit:hover {
+  text-decoration: underline;
+}
+
+.container .star-widget input {
   display: none;
 }
 
-.rating>label {
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  margin-top: auto;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23e3e3e3' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 76%;
-  transition: .3s;
+.star-widget label {
+  font-size: 40px;
+  color: #444;
+  padding: 10px;
+  float: right;
+  transition: all 0.2s ease;
 }
 
-.rating>input:checked~label,
-.rating>input:checked~label~label {
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23fcd93a' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+input:not(:checked)~label:hover,
+input:not(:checked)~label:hover~label {
+  color: #fd4;
 }
 
-
-.rating>input:not(:checked)~label:hover,
-.rating>input:not(:checked)~label:hover~label {
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23d8b11e' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+input:checked~label {
+  color: #fd4;
 }
 
-.emoji-wrapper {
+input#rate-5:checked~label {
+  color: #fe7;
+  text-shadow: 0 0 20px #952;
+}
+
+#rate-1:checked~form header:before {
+  content: "I just hate it. 😠";
+}
+
+#rate-2:checked~form header:before {
+  content: "I don't like it. 😞";
+}
+
+#rate-3:checked~form header:before {
+  content: "It is fine. 😐";
+}
+
+#rate-4:checked~form header:before {
+  content: "I like it. 😎";
+}
+
+#rate-5:checked~form header:before {
+  content: "I just love it. 😍";
+}
+
+input:checked~form {
+  display: block;
+}
+
+form header {
   width: 100%;
+  font-size: 20px;
+  color: #333;
+  font-weight: 500;
+  margin: 20px 0 10px 0;
   text-align: center;
+  transition: all 0.2 ease;
+}
+
+form .textarea {
   height: 100px;
+  width: 100%;
   overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
-.emoji-wrapper:before,
-.emoji-wrapper:after {
-  content: "";
-  height: 15px;
+form .textarea textarea {
+  height: 100%;
   width: 100%;
-  position: absolute;
-  left: 0;
-  z-index: 1;
+  outline: none;
+  color: #333;
+  padding-top: 10px;
+  border: none;
+  outline: none;
+  background: #f3f3f3;
+  padding: 12px 15px;
+  font-size: 17px;
+  resize: none;
 }
 
-.emoji-wrapper:before {
-  top: 0;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 35%, rgba(255, 255, 255, 0) 100%);
-}
-
-.emoji-wrapper:after {
-  bottom: 0;
-  background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 35%, rgba(255, 255, 255, 0) 100%);
-}
-
-.emoji {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: .3s;
-}
-
-.emoji>svg {
+form .btn {
+  height: 45px;
+  width: 100%;
   margin: 15px 0;
-  width: 70px;
-  height: 70px;
-  flex-shrink: 0;
 }
 
-#rating-1:checked~.emoji-wrapper>.emoji {
-  transform: translateY(-100px);
-}
-
-#rating-2:checked~.emoji-wrapper>.emoji {
-  transform: translateY(-200px);
-}
-
-#rating-3:checked~.emoji-wrapper>.emoji {
-  transform: translateY(-300px);
-}
-
-#rating-4:checked~.emoji-wrapper>.emoji {
-  transform: translateY(-400px);
-}
-
-#rating-5:checked~.emoji-wrapper>.emoji {
-  transform: translateY(-500px);
-}
-
-.feedback {
-  max-width: 360px;
-  background-color: #fff;
+form .btn button {
+  height: 100%;
   width: 100%;
-  /* padding: 30px; */
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
+  border: 1px solid #444;
+  outline: none;
+  background: green;
+  border-radius: 20px;
+  color: #FFF;
+  font-size: 17px;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  transform: all 0.3s ease;
 }
 
-.popup {
-  box-shadow: 4px 4px 10px #d1d9e6, -4px -4px 10px #f9f9f9;
-}
-
-textarea {
-  width: 100%;
-  margin-bottom: 10px
-}
-
-.error {
-  color: red;
+form .btn button:hover {
+  background-color: green;
 }
