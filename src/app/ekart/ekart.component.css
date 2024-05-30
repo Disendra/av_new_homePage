@@ -513,12 +513,23 @@ li::marker {
 }
 
 .popup {
-  overflow: hidden;
-  /* width: 218px;
-  height: 137px; */
-  width: auto;
-  height: auto;
+  position: relative;
+  padding: 1rem;
   border-bottom: 4px solid #6D67E4;
+}
+
+.popup-content {
+  position: relative;
+  width: 100%;
+}
+
+.seller_Name, .seller_Number, .seller_location {
+  margin: 0.5rem 0;
+}
+
+.person_Icon, .phone_Icon, .location_Icon {
+  margin-right: 0.5rem;
+  vertical-align: middle;
 }
 
 .product_Name {
@@ -687,6 +698,11 @@ textarea {
   font-weight: 500;
 }
 
+.custom-dialog-content {
+  width: 100%;
+  overflow: hidden;
+}
+
 .cart_Icon {
   margin-right: 15px;
 }
@@ -696,8 +712,10 @@ textarea {
 }
 
 .cancel_Icon {
-  margin-left: 90%;
-  margin-top: -20px;
+  position: absolute;
+  top: -10px;
+  right: -15px;
+  cursor: pointer;
 }
 
 @media (max-width: 767px) {

@@ -16,7 +16,7 @@ export class AvSimulatorComponent {
   // Add an array to store your invoice items
   items = [
     {
-      item: '',
+      // item: '',
       discription: '',
       make: '',
       hsn : '',
@@ -72,7 +72,7 @@ export class AvSimulatorComponent {
   addRow () {
     // Add a new item to the invoiceItems array
     this.items.push({
-      item: '',
+      // item: '',
       discription: '',
       make: '',
       hsn : '',

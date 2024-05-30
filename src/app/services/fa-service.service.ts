@@ -8,7 +8,7 @@ import { A, an, dA } from '@fullcalendar/core/internal-common'
 })
 export class FaServiceService {
    url = 'https://av-nodejs.onrender.com';
-  // url = 'http://localhost:3000'
+  // url = 'http://10.0.0.68:3000'
   // url = 'http://192.168.29.47:3000'
   macVendor = 'https://macvendorlookup.com/api/v2'
 

@@ -98,7 +98,7 @@ export class EkartComponent implements OnInit {
   }
 
   getUploadProducts (offset: any) {
-    this.showSpinner = true
+    this.showSpinner = true;
     this.userService.getUploadData(this.emailId, offset).subscribe(response => {
       console.log(response)
       this.getRecords(response);

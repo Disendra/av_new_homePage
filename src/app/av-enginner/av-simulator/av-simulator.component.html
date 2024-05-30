@@ -57,11 +57,11 @@
 		<table>
 		  <tr>
 			<th>S.No</th>
-			<th>Item</th>
+			<!-- <th>Item</th> -->
 			<th>Description</th>
 			<th>Make/Model</th>
 			<th>HSN/SAC</th>
-			<th>Quantity</th>
+			<th>QT</th>
 			<th>Unit Cost</th>
 			<th>Amount</th>
 			<th>CGST(%)</th>
@@ -69,9 +69,9 @@
 		  </tr>
 		  <tr *ngFor="let company of items; let i = index">
 			<td>{{i+1}}</td>
-			<td><textarea [(ngModel)]="company.item"></textarea></td>
-			<td><textarea [(ngModel)]="company.discription"></textarea></td>
-			<td><textarea [(ngModel)]="company.make"></textarea></td>
+			<!-- <td><textarea [(ngModel)]="company.item"></textarea></td> -->
+			<td><textarea class="desc_textarea" [(ngModel)]="company.discription"></textarea></td>
+			<td><textarea class="desc_textarea" [(ngModel)]="company.make"></textarea></td>
 			<td><textarea  [(ngModel)]="company.hsn"></textarea></td>
 			<td><input type="number" class="input_length" [(ngModel)]="company.quantity" (ngModelChange)="calculateAmount(company)"></td>
 			<td><input type="number" class="input_length" [(ngModel)]="company.unitCost" (ngModelChange)="calculateAmount(company)"></td>
@@ -82,8 +82,8 @@
 		</table>
 	  
 		<div class="text-end mt-2">
-		  <mat-icon (click)="removeRow()">remove_circle</mat-icon>
-		  <mat-icon (click)="addRow()">add_box</mat-icon>
+		  <mat-icon class="remove_Icon" (click)="removeRow()">remove_circle</mat-icon>
+		  <mat-icon class="add_Icon" (click)="addRow()">add_box</mat-icon>
 		</div>
 	  
 		<div style="flex: 1;">

@@ -223,17 +223,21 @@
 </ng-template>
 
 
-
 <ng-template #contact>
-<mat-dialog-content class="d-flex align-items-center justify-content-center popup">
-  <div *ngFor="let item of selectedItem">
-   <!-- <p> <mat-icon>person</mat-icon>{{ item.name }}</p> -->
-   <mat-icon mat-dialog-close class="cancel_Icon mb-0">cancel</mat-icon>
-   <p class="seller_Name"><mat-icon class="person_Icon">person</mat-icon> {{ item.userName }}</p>
-   <p class="seller_Number"><mat-icon class="phone_Icon">phone</mat-icon> {{ item.mobileNumber }} </p>
-   <p class="seller_location"><mat-icon class="location_Icon"> location_on</mat-icon> {{ item.location }} </p>
-  </div>
-</mat-dialog-content>
+  <mat-dialog-content class="d-flex align-items-center justify-content-center popup">
+    <div *ngFor="let item of selectedItem" class="popup-content">
+      <mat-icon mat-dialog-close class="cancel_Icon">cancel</mat-icon>
+      <p class="seller_Name">
+        <mat-icon class="person_Icon">person</mat-icon> {{ item.userName }}
+      </p>
+      <p class="seller_Number">
+        <mat-icon class="phone_Icon">phone</mat-icon> {{ item.mobileNumber }}
+      </p>
+      <p class="seller_location">
+        <mat-icon class="location_Icon">location_on</mat-icon> {{ item.location }}
+      </p>
+    </div>
+  </mat-dialog-content>
 </ng-template>
 
 <div *ngIf="showContactForm" class="d-flex justify-content-center align-items-center vh-100">

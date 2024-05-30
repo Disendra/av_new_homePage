@@ -30,7 +30,6 @@ html, body {
 
 .container .post {
   display: none;
-
 }
 
 .container .text {
@@ -66,10 +65,11 @@ html, body {
 }
 
 .star-widget label {
-  font-size: 40px;
+  font-size: 28px;
   color: #444;
   padding: 10px;
-  float: right;
+  padding-top: 0px;
+  padding-bottom: 0px;
   transition: all 0.2s ease;
 }
 
@@ -164,4 +164,57 @@ form .btn button {
 
 form .btn button:hover {
   background-color: green;
+}
+
+/* Media Queries for Responsiveness */
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 15px 20px;
+  }
+
+  .star-widget label {
+    font-size: 30px;
+    padding: 5px;
+  }
+
+  form header {
+    font-size: 18px;
+    margin: 15px 0 5px 0;
+  }
+
+  form .textarea textarea {
+    font-size: 15px;
+  }
+
+  form .btn button {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    padding: 10px 15px;
+  }
+
+  .star-widget label {
+    font-size: 25px;
+    /* padding: 3px; */
+  }
+
+  form header {
+    font-size: 16px;
+    margin: 10px 0 5px 0;
+  }
+
+  form .textarea textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  form .btn button {
+    font-size: 14px;
+  }
 }

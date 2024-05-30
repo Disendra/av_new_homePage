@@ -45,10 +45,9 @@ export class AvAboutComponent implements OnInit {
     }
   }
   getProfileData () {
-    this.showSpinner = true
+    this.showSpinner = true;
     this.userService.getProfile(this.emailId).subscribe((response: any) => {
       console.log(response)
-      this.showSpinner = false
       if (response.records.length !== 0) {
         const record = response.records[0]
         this.imagePath = record.imagePath;
@@ -63,11 +62,12 @@ export class AvAboutComponent implements OnInit {
         this.jobTitle = record.designation || 'not updated'
         this.gender = record.gender || 'not updated'
       }
+      this.showSpinner = false;
     })
   }
 
   saveProfileData () {
-    this.showSpinner = true
+    this.showSpinner = true;
     const profileData = new FormData()
     if (this.emailId !== 'not updated')
       profileData.append('emailId', this.emailId || '');
@@ -89,18 +89,18 @@ export class AvAboutComponent implements OnInit {
     this.userService.updateProfile(profileData).subscribe(
       (response: any) => {
         console.log(response)
-        this.showSpinner = false
+        this.showSpinner = false;
         window.location.reload()
       },
       (error: any) => {
-        this.showSpinner = false
+        this.showSpinner = false;
         console.error('Error occurred while saving profile:', error)
       }
     )
   }
 
   formattedDate() {
-    return this.datePipe.transform(this.signupDate, 'yyyy-MM-dd HH:mm:ss', 'UTC');
+    return this.datePipe.transform(this.signupDate, 'yyyy-MM-dd');
   }
 
   formatDOB (dob: any) {

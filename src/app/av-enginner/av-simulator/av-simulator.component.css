@@ -75,6 +75,9 @@ textarea {
 	border-color: #DDD;
 }
 
+.desc_textarea {
+	width: 175px;
+}
 
   @media only screen and (min-width: 768px) {
 	.container {
@@ -144,4 +147,3 @@ textarea {
 	}	
 
   }
-  

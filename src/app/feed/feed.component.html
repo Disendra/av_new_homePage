@@ -81,12 +81,9 @@
         </div>
         <footer>
           <h1>Our Sponsers</h1>
-            <div class="sponsor-logos">
-                <img class="sponsor-logo" src="assets/img/clients/client-1.png" alt="Sponsor Logo 1">
-                <img class="sponsor-logo" src="assets/img/clients/client-2.png" alt="Sponsor Logo 2">
-                <img class="sponsor-logo" src="assets/img/clients/client-3.png" alt="Sponsor Logo 3">
-                <img class="sponsor-logo" src="assets/img/clients/client-4.png" alt="Sponsor Logo 4">
-            </div>
+          <div class="sponsor-logos">
+            <img *ngFor="let logo of images" class="sponsor-logo" [src]="logo" alt="Logo_Img">
+          </div>          
         </footer>
     </div>
 </div>

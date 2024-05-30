@@ -13,6 +13,7 @@ p, img {
 
     .mobile-only {
         display: block;
+        text-align: center;
     }
 
     app-av-header {

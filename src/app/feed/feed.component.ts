@@ -24,6 +24,14 @@ export class FeedComponent implements OnInit {
     this.getData();
   }
 
+
+  images = [ 
+    'assets/img/clients/zoapi_img.png',
+    'assets/img/clients/At_img.png',
+    // 'assets/img/clients/letsving.png',
+    'assets/img/clients/babbler_img.png'
+  ];
+
   getData() {
     this.showSpinner = true;
     this.faService.getFeedData().subscribe((response: any) => {

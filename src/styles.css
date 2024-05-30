@@ -204,6 +204,14 @@ a {
     margin-left: 120%;
 }
 
+.remove_Icon {
+    color: red;
+}
+
+.add_Icon {
+    color: green;
+}
+
 .error_msg {
     color: indianred;
 }

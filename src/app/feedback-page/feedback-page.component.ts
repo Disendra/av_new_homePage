@@ -28,7 +28,7 @@ export class FeedbackPageComponent implements OnInit {
     this.emailId = localStorage.getItem('emailId');
     this.userName = localStorage.getItem('userName');
     const dialogOpened = localStorage.getItem('dialogOpened');
-    if (!dialogOpened) {
+    if (dialogOpened) {
       setTimeout(() => {
         this.popUp.openDialogWithTemplateRef(this.firstDialog);
         localStorage.setItem('dialogOpened', 'true');
