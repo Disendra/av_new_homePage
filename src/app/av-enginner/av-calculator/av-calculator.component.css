@@ -58,15 +58,6 @@
   text-align: center;
 }
 
-.bottom-text {
-  text-align: left;
-  padding: 10px;
-  margin: 0;
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-}
-
 .custom-images {
   max-height: 100px;
 }

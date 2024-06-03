@@ -37,7 +37,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { AvDirectoryComponent } from './av-enginner/av-directory/av-directory.component';
 import { FeedbackPageComponent } from './feedback-page/feedback-page.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { SpinnerComponent } from './spinner/spinner.component';
 import {MatIconModule} from '@angular/material/icon';
@@ -119,6 +119,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     PdfViewerModule,
     MatCheckboxModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     CommonModule,
     ReactiveFormsModule,
     GoogleSigninButtonModule,

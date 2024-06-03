@@ -64,10 +64,17 @@
             </div>
           </div>
           
+          <div class="col-lg-3 col-md-4" (click)="onClick('tradeShow')">
+            <div class="count-box d-flex flex-column align-items-center">
+              <img src="assets/img/av-profile/trade-show.jpg" class="img-fluid custom-images" alt="">
+              <p class="tool-header">Trade Show</p>
+              <p class="tool-description">Stay informed about all the AV tradeshows happening around the world.</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </section><!-- End Counts Section -->
-    <p class="bottom-text">Stay tuned for more tools...........................</p>
   </div>
   
 
@@ -81,7 +88,7 @@
     <app-av-simulator *ngIf="isSimulator"></app-av-simulator>
     <app-bussiness-card *ngIf="isBussinessCard"></app-bussiness-card>
     <app-reports *ngIf="isReports || isSpl || isMacFinder " [toolType]="toolType"></app-reports>
-    <app-btu-calculator *ngIf="isBtuCalculator || ispowerCal || isCalender" [toolType]="toolType"></app-btu-calculator>
+    <app-btu-calculator *ngIf="isBtuCalculator || ispowerCal || isCalender || isTradeshow" [toolType]="toolType"></app-btu-calculator>
   </div>
 
 </body>

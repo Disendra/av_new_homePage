@@ -92,7 +92,7 @@ export class ReportsComponent implements OnInit {
     this.faService.getMacData(sysAddress).subscribe((response: any) => {
       this.showSpinner = false
       console.log(response)
-      this.getVendorData = response
+      this.getVendorData = response.records[0].company;
       console.log(this.getVendorData)
     })
   }

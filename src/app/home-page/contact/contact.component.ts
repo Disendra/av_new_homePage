@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
+import { Router } from '@angular/router'
 import { FaServiceService } from 'src/app/services/fa-service.service'
 import { PopupService } from 'src/app/services/popup.service'
 
@@ -25,7 +26,7 @@ export class ContactComponent implements OnInit {
   captchaResolved : boolean = false;
   @ViewChild('myDialog') myDialog!: TemplateRef<any>  
   @ViewChild('captcha') captcha!: TemplateRef<any>
-  constructor (private faService: FaServiceService,  private popup: PopupService) {}
+  constructor (private faService: FaServiceService,  private popup: PopupService,private router: Router) {}
     
   ngOnInit(): void {
       if(this.header) {
@@ -157,7 +158,7 @@ handleError(error: any) {
 
   onClear() {
     if(this.buttonType === 'OK') {
-      window.location.reload();
+     this.router.navigate(['/home-page'])
     }
   }
 

@@ -120,6 +120,12 @@ export class AvSimulatorComponent {
     }
   }
 
+  adjustTextareaHeight(event: any) {
+    const textarea = event.target;
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+  }
+  
    downloadCard() {
     const element = document.getElementById('pdfContent');
     if (element) {

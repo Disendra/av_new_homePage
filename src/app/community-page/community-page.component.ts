@@ -176,6 +176,7 @@ loadMore () {
       .subscribe((response: any) => {
         this.mainQuestions = [...this.mainQuestions, ...response.records];
         console.log(response);
+        this.showSpinner = false;
         response.records.forEach((question: any) => {
           this.showContent(question); // Pass the entire question object
         });
@@ -191,10 +192,10 @@ loadMore () {
     formData.append('question', this.userQuestion)
     formData.append('image', this.selectedFile)
     formData.append('qId', this.updateQid)
-    if (this.questionURl) {
-      formData.append('urlLink', this.questionURl)
-    }
-
+    // Check if questionURl exists and is not undefined
+    if (this.questionURl && this.questionURl.trim() !== '') {
+      formData.append('urlLink', this.questionURl);
+  }
     this.commintyService
       .updateCommunity(formData)
       .subscribe((response: any) => {
@@ -202,7 +203,8 @@ loadMore () {
         if (response && response.status) {
           this.userService.refreshData()
           this.showSpinner = false
-          alert(response.message)
+          alert(response.message);
+          this.onSelect('myPosts');
           // window.location.reload()
         } else {
           alert('An error occurred. Please try again later.')
@@ -353,31 +355,31 @@ loadMore () {
   }
 
   //delete
-  deleteQuestion (question: any) {
-    console.log(question)
-    this.showSpinner = true
+  deleteQuestion(question: any) {
+    console.log(question);
+    this.showSpinner = true;
     const questionData = {
-      emailId: question.question_owner_email,
-      qId: question.qId
+        emailId: question.question_owner_email,
+        qId: question.qId
+    };
+    const confirmation = confirm('Are you sure you want to delete the Product?');
+    if (confirmation) {
+        this.commintyService
+            .deleteCommunity(questionData)
+            .subscribe((response: any) => {
+                console.log('Response from server:', response);
+                this.showSpinner = false;
+                if (response && response.status) {
+                    alert(response.message);
+                    this.onSelect('myPosts');
+                } else {
+                    alert('An error occurred. Please try again later.');
+                }
+            });
+    } else {
+        this.showSpinner = false;
     }
-    const confirmation = confirm('Are you sure you want to delete the Product?')
-    if (!confirmation) {
-      return
-    }
-    this.commintyService
-      .deleteCommunity(questionData)
-      .subscribe((response: any) => {
-        console.log('Response from server:', response)
-        this.showSpinner = false
-        if (response && response.status) {
-          alert(response.message);
-          this.onSelect('myPosts');
-        } else {
-          alert('An error occurred. Please try again later.')
-        }
-      })
-  }
-
+}
 
 //Like and Dislikes operations
 performActions(question: any, type: string) {

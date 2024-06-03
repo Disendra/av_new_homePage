@@ -709,8 +709,6 @@ textarea {
   white-space: pre-wrap;
 }
 
-
-
 @media (max-width: 767.98px) {
   .av_header_img {
     display: none;

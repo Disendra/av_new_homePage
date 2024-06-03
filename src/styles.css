@@ -204,6 +204,10 @@ a {
     margin-left: 120%;
 }
 
+.text_underline {
+    text-decoration: underline !important;
+  }
+
 .remove_Icon {
     color: red;
 }

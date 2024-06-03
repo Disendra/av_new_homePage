@@ -149,7 +149,7 @@
     </div>
 
 <div *ngIf="isCalender">  
-  <div class='container demo-app-main'>
+  <div (onLoad)="getEvents()" class='container demo-app-main'>
     <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
       <ng-template #eventContent let-arg>
         <i class="event-title" [title]="arg.event.title">{{ arg.event.title }}</i>
@@ -157,6 +157,28 @@
     </full-calendar>    
   </div>    
 </div>
+
+<div *ngIf="isTradeshow">  
+  <div class="container td_container">
+    <div class="row td_row">
+      <div class="col-12" *ngFor="let box of tradeshowBoxes">
+        <div class="card mb-2 td_card" [ngStyle]="{'background-color': box.bgColor}">
+          <a [href]="box.urlLink" target="_blank" class="text-decoration-none">
+          <div class="card-body">
+            <h5 class="card-title">{{ box.title }}</h5>
+            <!-- <p class="card-text">{{ box.description }}</p> -->
+          </div></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+      
+</div>
+
+
+
+
 
  <!-- Dialog template -->
  <ng-template #myDialog>

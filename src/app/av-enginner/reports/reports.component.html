@@ -99,8 +99,8 @@
     <input type="text" class="mac_Search" name="search" [(ngModel)]="sysAddress" placeholder="Enter Mac address.." (keyup.enter)="getVendor(sysAddress)">
     <i class="fa fa-search"></i>
     </div>
-    <div *ngFor="let address of getVendorData" class="company_Name">
-      <h1 style="text-align: center;">{{ address.company }}</h1>
+    <div class="company_Name">
+      <h1 style="text-align: center;">{{ getVendorData }}</h1>
     </div>    
 </div>
 <app-spinner *ngIf="showSpinner"></app-spinner>

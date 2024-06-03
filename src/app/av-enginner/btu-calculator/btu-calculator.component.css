@@ -202,6 +202,32 @@ full-calendar {
     padding-top: 10px;
 }
 
+.td_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.td_row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 30px;
+}
+
+.td_card {
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 21px;
+    height: 60px;
+}
+
+.card-title {
+    text-align: center;
+    color: white;
+    font-size: 18px;
+}
+
 /* :host ::ng-deep .fc-prev-button, :host ::ng-deep .fc-next-button, :host ::ng-deep .fc-today-button {
     background-color: #EFBC9B;
     margin-left: 1px;
@@ -214,10 +240,49 @@ full-calendar {
     border: none;
 } */
 
-:host ::ng-deep .fc-button-group button.fc-button.fc-button-primary {
-    background-color: #00bcd482;
-    margin-left: 1px;
+:host ::ng-deep .fc-button-group button.fc-prev-button.fc-button,
+:host ::ng-deep .fc-button-group button.fc-next-button.fc-button {
+    background-color: transparent;
+    /* Resetting background color */
     border: none;
+    /* Resetting border */
+}
+
+:host ::ng-deep .fc-button-group button.fc-prev-button.fc-button .fc-icon {
+    color: orange;
+    /* Color for the previous button icon */
+}
+
+:host ::ng-deep .fc-button-group button.fc-next-button.fc-button .fc-icon {
+    color: green;
+    /* Color for the next button icon */
+    border: none;
+    margin-left: 1px;
+}
+
+
+:host ::ng-deep .fc-button-group button.fc-dayGridMonth-button.fc-button {
+    background: #FFA62F;
+    border: none;
+    margin-left: 1px;
+}
+
+:host ::ng-deep .fc-button-group button.fc-timeGridWeek-button.fc-button {
+    background: #FFC96F;
+    border: none;
+    margin-left: 1px;
+}
+
+:host ::ng-deep .fc-button-group button.fc-timeGridDay-button.fc-button {
+    background: #FFE8C8;
+    border: none;
+    margin-left: 1px;
+}
+
+:host ::ng-deep .fc-button-group button.fc-listWeek-button.fc-button {
+    background: #ACD793;
+    border: none;
+    margin-left: 1px;
 }
 
 .event-title {

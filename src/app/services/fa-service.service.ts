@@ -1,16 +1,14 @@
 import { formatDate } from '@angular/common'
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { A, an, dA } from '@fullcalendar/core/internal-common'
 
 @Injectable({
   providedIn: 'root'
 })
 export class FaServiceService {
    url = 'https://av-nodejs.onrender.com';
-  // url = 'http://10.0.0.68:3000'
+  // url = 'http://localhost:3000'
   // url = 'http://192.168.29.47:3000'
-  macVendor = 'https://macvendorlookup.com/api/v2'
 
   constructor (private http: HttpClient) {}
 
@@ -73,9 +71,8 @@ export class FaServiceService {
   postEvent (data: any) {
     return this.http.post(`${this.url}/postEvent`, data)
   }
-
-  getMacData (sysAdress: any) {
-    return this.http.get(`${this.macVendor}/${sysAdress}`)
+  getMacData(sysAddress: any) {
+    return this.http.get(`${this.url}/getMacData/${sysAddress}`);
   }
 
   insertFeedData (data: any) {
@@ -84,6 +81,14 @@ export class FaServiceService {
 
   insertEvent (data: any) {
     return this.http.post(`${this.url}/insertEvent`, data)
+  }
+
+  insertTradeShow (data: any) {
+    return this.http.post(`${this.url}/insertTradeShow`, data)
+  } 
+
+  getTradeShow() {
+    return this.http.get(`${this.url}/getTradeShow`)
   }
 
   getRoles () {

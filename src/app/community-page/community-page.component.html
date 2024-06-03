@@ -155,20 +155,20 @@
                   <div class="timeline-body" *ngFor="let feedback of item.feedbackInfo">
                     <div class="timeline-header">
                       <span class="userimage"><img [src]="item.question_owner_imagePath" alt=""></span>
-                      <span class="username"><a href="javascript:;">{{ item.question_userName_name }}</a></span>
+                      <span class="username"><a>{{ item.question_userName_name }}</a></span>
                       <span class="pull-right text-muted">{{ feedback.total_views }} Views</span>
                     </div>
                     <div class="timeline-content" (click)="toggleShowFullQuestion(item)">
-                      <p>{{ item.question }}</p>
-                    </div>
-
+                      <p>{{ (item.question.length > 60 || item.imagePath || (item.urlLink !== 'undefined' && item.urlLink !== null && item.urlLink.trim() !== '')) && !questionStates[item.qId] ? (item.question | slice:0:50) + '....' : item.question }}</p>
+                    </div>                              
+                    
                   <div *ngIf="isQuestionOpen(item)">
                        <div *ngIf="item.imagePath" class="timeline-content image-container">
                       <img [src]="item.imagePath" alt="Image">
                     </div>
-                    <div *ngIf="item.urlLink !== undefined && item.urlLink !== null" class="timeline-content">
+                    <div *ngIf="item.urlLink !== 'undefined' && item.urlLink !== null && item.urlLink.trim() !== ''" class="timeline-content">
                       <a target="_blank" [href]="item.urlLink">{{ item.urlLink }}</a>
-                  </div>
+                  </div>                              
                   
                   </div> 
                     <div class="timeline-likes">
@@ -237,9 +237,15 @@
   </div>
 </div>
 
-<div class="btn_box">
+<div class="btn_box" *ngIf="mainQuestions.length !== 0">
   <a class="view_more-link" (click)="loadMore()">View More</a>
 </div>
+</div>
+
+<div class="row justify-content-center align-items-center" *ngIf="mainQuestions.length === 0" style="height: 70vh;">
+  <div class="col-sm-6 col-lg-3 text-center">
+    <img src="assets/img/ekart/empty_produts.png" class="img-fluid" alt="No products">
+  </div>
 </div>
 
 <!-- Dialog template -->

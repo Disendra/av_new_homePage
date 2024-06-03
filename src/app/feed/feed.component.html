@@ -73,9 +73,14 @@
                     <h1>{{ email.title }}</h1>
                 </header>
                 <div class="description">
+                  <p>Dear User,</p>
                     <p>{{ email.description }}</p>
+                   <div *ngIf="email.link">
                     <p>Source:</p>
                     <p><a class="links" href="{{ email.link }}" target="_blank">{{ email.link }}</a></p>
+                   </div>
+                   <p>Best regards,<br>
+                    AV CHAMPS.</p>
                 </div>
             </div>
         </div>

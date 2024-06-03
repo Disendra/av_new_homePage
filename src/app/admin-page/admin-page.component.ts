@@ -25,7 +25,7 @@ export class AdminPageComponent implements OnInit {
   selectedRating: any = 'All'
   endDate!: Date | null
   showSpinner: boolean = false
-  showAdminpanel: boolean = false;
+  showAdminpanel: boolean = true;
   selectedOptions: any
   @ViewChild('myDialog') myDialog!: TemplateRef<any>
 
@@ -95,11 +95,33 @@ export class AdminPageComponent implements OnInit {
     })
   }
 
+  postTradeshow () {
+    this.showSpinner = true
+    const data = {
+      title: this.eventName,
+      website_Url: this.eventUrl,
+      dltFeedDate: this.dltFeedDate
+    }
+    this.faService.insertTradeShow(data).subscribe((response: any) => {
+      console.log('Form submitted:', response)
+      if (response.status) {
+        alert(response.message)
+        this.showSpinner = false;
+        this.onClear()
+      } else {
+        alert(response.message)
+        this.showSpinner = false
+      }
+    })
+  }
+
+
   onClear () {
     this.sender = ''
     this.title = ''
     this.description = ''
     this.eventName = ''
+    this.eventUrl = ''    
     ;(this.link = ''), (this.startDate = null)
     ;(this.endDate = null), (this.dltFeedDate = '')
   }
